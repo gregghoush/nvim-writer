@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.2] - 2025-03-03
 
 ### Fixed
+
 - Added "TelescopePrompt" and "TelescopeResults" to ignored filetypes to prevent autocompletion
 - Added "artisan-output" to ignored filetypes for Laravel Helper integration
 - Consolidated duplicate filetype ignore lists into a single global list
@@ -17,12 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.1] - 2025-03-03
 
 ### Changed
+
 - Improved GitHub workflows with dedicated documentation checks
 - Enhanced release workflow with more reliable changelog generation
 - Updated GitHub Actions dependencies to latest versions
 - Improved test and linting infrastructure for CI/CD pipeline
 
 ### Fixed
+
 - Fixed deprecated changelog generator in release workflow
 - Added proper Markdown documentation validation
 - Improved error handling in GitHub workflows
@@ -31,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.0] - 2025-03-02
 
 ### Added
+
 - GitHub Discussions integration
 - Release automation workflow
 - Acknowledgements section in README
@@ -41,11 +45,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-commit hooks for running tests and linting
 
 ### Changed
+
 - Improved README organization and structure
 - Standardized GitHub workflow naming conventions
 - Enhanced test infrastructure for different config structures
 
 ### Fixed
+
 - Pre-commit hook path references for test initialization files
 - Test execution in pre-commit hooks using custom test runner
 - Standardized test initialization file naming across all projects
@@ -53,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.0] - 2025-03-01
 
 ### Added
+
 - Version tracking with semantic versioning
 - Comprehensive test framework using BDD-style syntax
 - GitHub Actions workflow for CI/CD
@@ -61,11 +68,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub Sponsors and Ko-fi funding links
 
 ### Changed
+
 - Improved module loading approach for better performance
 - Enhanced error handling throughout configuration
 - Updated contributing guidelines with references to development guide
 
 ### Fixed
+
 - Snacks module loading issues
 - Deprecated Neovim API calls in profile.lua
 - Snacks image module configuration errors
@@ -74,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2025-02-01
 
 ### Added
+
 - Claude Code integration
 - Laravel Helper integration
 - Enhanced PHP development environment
@@ -82,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2024-12-15
 
 ### Added
+
 - Initial configuration setup
 - Core plugin ecosystem
 - Basic keybindings and settings

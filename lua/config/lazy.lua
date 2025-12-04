@@ -79,7 +79,7 @@ require("lazy").setup("plugins", {
     concurrency = 1, -- lower concurrency to reduce CPU
   },
   install = {
-    colorscheme = { "catppuccin" },
+    colorscheme = { "monokai-pro" },
   },
   ui = {
     -- Defer UI rendering to improve startup time

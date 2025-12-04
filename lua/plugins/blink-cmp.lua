@@ -1,10 +1,8 @@
 local sources_default = {
-  "lazydev",
   "lsp",
   "path",
   "buffer",
   "ripgrep",
-  "snippets",
 }
 
 local border = {
@@ -25,17 +23,6 @@ return {
     "saghen/blink.compat",
     "mikavilpas/blink-ripgrep.nvim",
     "dmitmel/cmp-cmdline-history",
-    {
-      "L3MON4D3/LuaSnip",
-      version = "v2.*",
-      build = "make install_jsregexp",
-      dependencies = {
-        "rafamadriz/friendly-snippets",
-        config = function()
-          require("luasnip.loaders.from_vscode").lazy_load()
-        end,
-      },
-    },
   },
   version = "*",
   lazy = true, -- Make sure the plugin is truly lazy-loaded
@@ -129,8 +116,6 @@ return {
       window = { border = border },
     },
 
-    snippets = { preset = "luasnip" },
-
     cmdline = {
       enabled = true,
       keymap = { preset = "cmdline" },
@@ -167,10 +152,6 @@ return {
       },
 
       providers = {
-        lazydev = {
-          name = "lazydev",
-          module = "lazydev.integrations.blink",
-        },
         lsp = {
           name = "lsp",
           module = "blink.cmp.sources.lsp",
@@ -179,15 +160,11 @@ return {
         path = {
           name = "path",
           module = "blink.cmp.sources.path",
-          fallbacks = { "buffer", "snippets", "luasnip" },
+          fallbacks = { "buffer" },
         },
         buffer = {
           name = "buffer",
           module = "blink.cmp.sources.buffer",
-        },
-        snippets = {
-          name = "snippets",
-          module = "blink.cmp.sources.snippets",
         },
         cmdline_history_cmd = {
           name = "cmdline_history",

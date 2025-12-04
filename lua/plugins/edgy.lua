@@ -21,7 +21,6 @@ return {
     right = {
       -- { ft = "Avante", title = "Avante", size = { width = 0.5 } },
       { ft = "grug-far", title = "Search & Replace", size = { width = 0.5 } },
-      { ft = "neotest-summary", title = "neotest", size = { width = 0.3 } },
       { ft = "Outline", title = "Outline", size = { width = 0.2 } },
       {
         ft = "trouble",
@@ -50,7 +49,6 @@ return {
           return vim.bo[buf].buftype == "help"
         end,
       },
-      { ft = "neotest-output-panel", title = "neotest", size = { height = 0.5 } },
       { ft = "qf", title = "QuickFix" },
       {
         ft = "snacks_terminal",

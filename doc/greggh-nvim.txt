@@ -54,7 +54,6 @@ This will automatically install all required plugins on first launch.
 - Git integration
 - Debugging capabilities
 - Autocompletion with blink.cmp
-- Snippets support with LuaSnip
 - Markdown preview
 - Terminal integration
 - File explorer integration

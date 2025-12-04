@@ -18,35 +18,11 @@ return {
       ensure_installed = {
         "regex",
         "diff",
-        "python",
-        "toml",
-        "json",
-        "rst",
-        "ninja",
         "markdown",
         "markdown_inline",
-        -- Add parsers for web development
-        "javascript",
-        "typescript",
-        "tsx",
-        "html",
-        "css",
-        "php",
-        "astro",
-        "jsdoc",
-        "yaml",
-        -- Programming languages
-        "go",
-        "rust",
-        "sql",
-        "zig",
-        "dockerfile",
-        -- Add Lua since you're writing Neovim config
         "lua",
         "vim",
         "vimdoc",
-        -- Add bash for shell scripting
-        "bash",
       },
       highlight = {
         enable = true,

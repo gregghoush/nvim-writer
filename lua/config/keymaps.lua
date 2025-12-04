@@ -17,17 +17,12 @@ local function get_snacks()
 end
 
 local builtin_map = {
-  -- Command mode tab completion ["c|<tab>"] = map_cmd("<C-z>"):with_noremap():with_desc("edit: Command completion"),
 
   -- fix stupid typo
   ["n|q:"] = map_cmd("<Cmd>q<CR>"):with_noremap():with_silent():with_desc("edit: Quit"),
 
   -- Paste replace visual selection without yanking: https://vim.fandom.com/wiki/Pasting_over_visual_selection
   ["v|p"] = map_cmd('"_dP'):with_noremap():with_silent():with_desc("edit: Paste replace visual selection"),
-
-  -- Easy insertion of a trailing ; or , from insert mode
-  ["i|;;"] = map_cmd("<Esc>A;"):with_noremap():with_silent():with_desc("edit: Insert trailing semicolon"),
-  ["i|,,"] = map_cmd("<Esc>A,"):with_noremap():with_silent():with_desc("edit: Insert trailing comma"),
 
   -- Quickly clear search highlights
   ["n|<leader>k"] = map_cr("nohlsearch"):with_noremap():with_silent():with_desc("edit: Clear search highlights"),
@@ -102,11 +97,6 @@ vim.defer_fn(function()
 end, 10)
 
 local plug_map = {
-  -- Plugin: avante
-  -- Avante's keybindings are built into the plugin itself or in avante-prompts.lua
-
-  ["nt|<C-,>"] = map_cmd("<CMD>ClaudeCode<CR>"):with_noremap():with_silent():with_desc("Claude Code: Toggle"),
-
   -- Plugin: conform.nvim
   ["n|<leader>cf"] = map_callback(function()
       require("conform").format({ async = true, lsp_format = "fallback" })
@@ -168,10 +158,6 @@ local plug_map = {
   ["i|<c-a-k>"] = map_cmd("<Esc><CMD>m .-2<CR>==gi"):with_noremap():with_silent():with_desc("Move: Line up"),
   ["v|<c-a-j>"] = map_cmd("<ESC><CMD>'<,'>m '>+1<CR>gv=gv"):with_noremap():with_silent():with_desc("Move: Line down"),
   ["v|<c-a-k>"] = map_cmd("<ESC><CMD>'<,'>m '<-2<CR>gv=gv"):with_noremap():with_silent():with_desc("Move: Line up"),
-
-  -- Plugin: ccc
-  ["n|<leader>cp"] = map_cmd("<CMD>CccPick<CR>"):with_noremap():with_silent():with_desc("Color Picker"),
-  ["i|<C-c>"] = map_cmd("<CMD>CccPick<CR>"):with_noremap():with_silent():with_desc("Color Picker"),
 
   -- Plugin Lazygit
   ["n|<leader>gg"] = map_callback(function()
@@ -375,62 +361,6 @@ local plug_map = {
   ["n|<leader>qv"] = map_cmd("<CMD>Suda wq<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit"),
   ["n|<leader>qa"] = map_cmd("<CMD>Suda wqa<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit all"),
 
-  -- Plugin: neotest
-  ["n|<leader>tl"] = map_callback(function()
-      require("neotest").run.run_last()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Run Last (Neotest)"),
-  ["n|<leader>to"] = map_callback(function()
-      require("neotest").output.open({ enter = true, auto_close = true })
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Show Output (Neotest)"),
-  ["n|<leader>tO"] = map_callback(function()
-      require("neotest").output_panel.toggle()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Toggle Output Panel (Neotest)"),
-  ["n|<leader>tr"] = map_callback(function()
-      require("neotest").run.run()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Run Nearest (Neotest)"),
-  ["n|<leader>ts"] = map_callback(function()
-      require("neotest").summary.toggle()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Toggle Summary (Neotest)"),
-  ["n|<leader>tS"] = map_callback(function()
-      require("neotest").run.stop()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Stop (Neotest)"),
-  ["n|<leader>tt"] = map_callback(function()
-      require("neotest").run.run(vim.fn.expand("%"))
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Run File (Neotest)"),
-  ["n|<leader>tT"] = map_callback(function()
-      require("neotest").run.run(require("utils.git").get_workspace_root())
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Run All Test Files (Neotest)"),
-  ["n|<leader>tw"] = map_callback(function()
-      require("neotest").watch.toggle(vim.fn.expand("%"))
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Toggle Watch (Neotest)"),
-
   -- Plugin: todo-comments
   ["n|<leader>xc"] = map_callback(function()
       ---@diagnostic disable-next-line: undefined-field
@@ -476,14 +406,6 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: LSP"),
-
-  -- Pligin: actions-preview
-  ["nv|<leader>ca"] = map_callback(function()
-      require("actions-preview").code_actions()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Code Actions"),
 
   -- Plugin: snacks rename
   ["n|<leader>fR"] = map_callback(function()
@@ -642,41 +564,6 @@ vim.defer_fn(function()
     vim.notify("which-key not available or missing add method", vim.log.levels.WARN)
     return
   end
-
-  -- Register keymap descriptions with which-key in batches
-  -- basic
-  wk.add({ mode = "n" }, {
-    { "ccb", desc = "Togggle block comment" },
-    { "ccc", desc = "Toggle line comment" },
-    { "cbc", desc = "Toggle comment" },
-  })
-
-  wk.add({ mode = "x" }, {
-    { "cc", desc = "Toggle line comment" },
-    { "cb", desc = "Togggle block comment" },
-  })
-
-  -- extra
-  wk.add({ mode = "n" }, {
-    { "ccA", desc = "Comment end of line" },
-    { "cco", desc = "Comment next line" },
-    { "ccO", desc = "Comment prev line" },
-  })
-
-  -- extended
-  wk.add({ mode = "n" }, {
-    { "c>", desc = "Comment region" },
-    { "c<lt>", desc = "Uncomment region" },
-    { "c<lt>c", desc = "Remove line comment" },
-    { "c<lt>b", desc = "Remove block comment" },
-    { "c>c", desc = "Add line comment" },
-    { "c>b", desc = "Add block comment" },
-  })
-
-  wk.add({ mode = "x" }, {
-    { "c>", desc = "Comment region" },
-    { "c<lt>", desc = "Uncomment region" },
-  })
 end, 40)
 
 -- Add icons to everything in which-key (deferred loading)
@@ -736,13 +623,6 @@ vim.defer_fn(function()
     { "<leader>tS", desc = "Stop (Neotest)", icon = "󰝤" },
     { "<leader>tT", desc = "TODO (Neotest)", icon = "" },
     { "<leader>ta", desc = "Code Actions", icon = "" },
-    { "<leader>tl", desc = "Run Last (Neotest)", icon = "" },
-    { "<leader>to", desc = "Show Output (Neotest)", icon = "" },
-    { "<leader>tO", desc = "Toggle Output Panel (Neotest)", icon = "" },
-    { "<leader>tr", desc = "Run Nearest (Neotest)", icon = "" },
-    { "<leader>ts", desc = "Toggle Summary (Neotest)", icon = "" },
-    { "<leader>tt", desc = "Run File (Neotest)", icon = "" },
-    { "<leader>tw", desc = "Toggle Watch (Neotest)", icon = "" },
     { "<leader>xq", desc = "Trouble: quickfix list", icon = "" },
     { "<leader>xd", desc = "Populate workspace diagnostics", icon = "" },
     { "<leader>xl", desc = "Trouble: location list", icon = "󰀹" },

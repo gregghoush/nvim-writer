@@ -12,6 +12,7 @@ test.describe("UI Components", function()
     -- Check for theme configuration in separate module
     local colorscheme_modules = {
       "catppuccin", -- Most likely
+      "monokai-pro",
       "kanagawa",
       "tokyonight",
       "onedark",

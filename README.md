@@ -17,16 +17,16 @@
 
 ![Neovim Screenshot](assets/readme/neovim.png)
 
-*A modern, feature-rich Neovim configuration with a focus on productivity and developer experience*
+_A modern, feature-rich Neovim configuration with a focus on productivity and developer experience_
 
-[Features](#features) • 
-[Requirements](#requirements) • 
-[Installation](#installation) • 
-[Key Bindings](#key-bindings) • 
-[Screenshots](#screenshots) • 
-[Plugins](#plugins) • 
-[Contributing](#contributing) • 
-[License](#license) • 
+[Features](#features) •
+[Requirements](#requirements) •
+[Installation](#installation) •
+[Key Bindings](#key-bindings) •
+[Screenshots](#screenshots) •
+[Plugins](#plugins) •
+[Contributing](#contributing) •
+[License](#license) •
 [Discussions](https://github.com/greggh/nvim/discussions)
 
 </div>
@@ -57,7 +57,7 @@
 - AI integration with Claude Code and Copilot
 - Integrated terminal experience
 - Comprehensive plugin ecosystem
-- Advanced autocompletion and snippets
+- Advanced autocompletion
 - Fast startup and responsive editing experience
 
 ## Requirements
@@ -96,36 +96,36 @@ git clone git@github.com:greggh/nvim ~/.config/nvim
 
 > 💡 Press `<Space>` to see available key bindings via which-key
 
-| Category | Key Binding | Description |
-|----------|-------------|-------------|
-| **General** | `<C-s>` or `<leader>qs` | Save file |
-| | `<C-q>` or `<leader>qq` | Quit |
-| | `<leader>qz` | Force quit |
-| **Navigation** | `<leader>e` | File explorer |
-| | `<leader>ff` | Find files |
-| | `<leader>fg` | Live grep |
-| **Git** | `<leader>gg` | LazyGit |
-| | `<leader>gl` | View git log |
-| | `<leader>gb` | View git blame |
-| **LSP** | `<leader>lo` | Toggle LSP outline |
-| | `<leader>xw` | Find in workspace |
-| | `<leader>ca` | Code actions |
-| **Testing** | `<leader>tr` | Run nearest test |
-| | `<leader>tt` | Run file tests |
-| **AI** | `<leader>ac` | Toggle Claude Code (normal mode) |
-| | `<C-o>` | Toggle Claude Code (terminal mode) |
-| **Folding** | `<leader>z0` | Toggle level 0 |
-| | `<leader>z1` | Toggle level 1 |
-| | `<leader>z2` | Toggle level 2 |
-| **Windows** | `<leader>wm` | Toggle maximize window |
-| **Buffers** | `<leader>bw` | Close buffer safely |
-| | `<leader>bo` | Close other buffers |
-| **Treesitter** | `af/if` | Function text object |
-| | `ac/ic` | Class text object |
-| | `aa/ia` | Parameter text object |
-| | `[f/]f` | Navigate between functions |
-| | `[c/]c` | Navigate between classes |
-| | `[a/]a` | Navigate between parameters |
+| Category       | Key Binding             | Description                        |
+| -------------- | ----------------------- | ---------------------------------- |
+| **General**    | `<C-s>` or `<leader>qs` | Save file                          |
+|                | `<C-q>` or `<leader>qq` | Quit                               |
+|                | `<leader>qz`            | Force quit                         |
+| **Navigation** | `<leader>e`             | File explorer                      |
+|                | `<leader>ff`            | Find files                         |
+|                | `<leader>fg`            | Live grep                          |
+| **Git**        | `<leader>gg`            | LazyGit                            |
+|                | `<leader>gl`            | View git log                       |
+|                | `<leader>gb`            | View git blame                     |
+| **LSP**        | `<leader>lo`            | Toggle LSP outline                 |
+|                | `<leader>xw`            | Find in workspace                  |
+|                | `<leader>ca`            | Code actions                       |
+| **Testing**    | `<leader>tr`            | Run nearest test                   |
+|                | `<leader>tt`            | Run file tests                     |
+| **AI**         | `<leader>ac`            | Toggle Claude Code (normal mode)   |
+|                | `<C-o>`                 | Toggle Claude Code (terminal mode) |
+| **Folding**    | `<leader>z0`            | Toggle level 0                     |
+|                | `<leader>z1`            | Toggle level 1                     |
+|                | `<leader>z2`            | Toggle level 2                     |
+| **Windows**    | `<leader>wm`            | Toggle maximize window             |
+| **Buffers**    | `<leader>bw`            | Close buffer safely                |
+|                | `<leader>bo`            | Close other buffers                |
+| **Treesitter** | `af/if`                 | Function text object               |
+|                | `ac/ic`                 | Class text object                  |
+|                | `aa/ia`                 | Parameter text object              |
+|                | `[f/]f`                 | Navigate between functions         |
+|                | `[c/]c`                 | Navigate between classes           |
+|                | `[a/]a`                 | Navigate between parameters        |
 
 For a complete list of keybindings, press `<Space>` to see the which-key popup menu.
 
@@ -133,15 +133,15 @@ For a complete list of keybindings, press `<Space>` to see the which-key popup m
 
 ![Editor with Telescope](assets/readme/neovim.png)
 
-*Main editor with Telescope file finder*
+_Main editor with Telescope file finder_
 
 ![Code with LSP](assets/readme/code-with-lsp.png)
 
-*Code editing with LSP diagnostics*
+_Code editing with LSP diagnostics_
 
 ![Terminal Integration](assets/readme/terminal.png)
 
-*Integrated terminal experience*
+_Integrated terminal experience_
 
 ## Plugins
 
@@ -170,7 +170,6 @@ This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its p
 - [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim)
 - [edgy.nvim](https://github.com/folke/edgy.nvim)
 - [flash.nvim](https://github.com/folke/flash.nvim)
-- [friendly-snippets](https://github.com/rafamadriz/friendly-snippets)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim)
 - [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim)
@@ -183,7 +182,6 @@ This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its p
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
 - [lazydev.nvim](https://github.com/folke/lazydev.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
-- [LuaSnip](https://github.com/L3MON4D3/LuaSnip)
 - [markview.nvim](https://github.com/OXY2DEV/markview.nvim)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
@@ -258,7 +256,7 @@ This configuration includes a comprehensive testing framework and development to
 - **Linting**: Run `make lint` to check code quality
 - **Formatting**: Run `make format` to format Lua code
 - **Git Hooks**: Run `./scripts/setup-hooks.sh` to set up pre-commit hooks
-- **Automation**: 
+- **Automation**:
   - Automated releases via the GitHub Actions workflow
   - Weekly dependency updates check via GitHub Actions
   - Comprehensive CI pipeline for testing all changes
@@ -297,3 +295,4 @@ For a complete development environment setup, see [DEVELOPMENT.md](DEVELOPMENT.m
 <div align="center">
   <p>Made with ❤️ by <a href="https://github.com/greggh">Gregg Housh</a></p>
 </div>
+

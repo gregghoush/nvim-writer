@@ -53,7 +53,6 @@ The testing framework includes mocks for common Neovim plugins and modules. When
 
 Key mocked plugins include:
 
-- `luasnip`: Full mock of snippet functionality
 - `nvim-treesitter`: Basic setup functions
 - `cmp`: Completion plugin with mapping functions
 - Other common plugins (telescope, lspconfig, mason, etc.)
@@ -81,3 +80,4 @@ package.loaded['new-plugin'] = {
 
 These tests are designed to be run in CI environments and will return appropriate exit codes
 to signal test failures.
+

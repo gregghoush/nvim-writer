@@ -6,8 +6,8 @@
 
 local M = {
   major = 0,
-  minor = 4,
-  patch = 2,
+  minor = 1,
+  patch = 0,
 }
 
 --- Returns the formatted version string
