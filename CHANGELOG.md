@@ -36,7 +36,7 @@ based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this proj
 
 - GitHub Discussions integration
 - Release automation workflow
-- Acknowledgements section in README
+- Acknowledgments section in README
 - Enhanced badges and Table of Contents in README
 - Comprehensive test suite with plugin management tests
 - UI component tests for colorscheme and status line

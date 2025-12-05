@@ -31,6 +31,26 @@ return {
     -- lsp servers
     ---------------------
     local servers = {
+      harper_ls = {
+        enabled = true,
+        filetypes = { "markdown", "mkd", "gitcommit", "text", "plaintext" },
+        settings = {
+          ["harper-ls"] = {
+            userDictPath = "/usr/share/dict/words",
+            linters = {
+              ToDoHyphen = false,
+              -- SentenceCapitalization = true,
+              -- SpellCheck = true,
+            },
+            isolateEnglish = true,
+            markdown = {
+              -- [ignores this part]()
+              -- [[ also ignores my marksman links ]]
+              IgnoreLinkTitle = true,
+            },
+          },
+        },
+      },
       bashls = {},
       marksman = {},
       ltex_plus = {
@@ -92,7 +112,7 @@ return {
     -- LSP tools
     ---------------------
     local LSP_TOOLS = {
-      "prettier",
+      -- "prettier",
     }
 
     ---------------------
@@ -125,9 +145,10 @@ return {
     ---------------------
     local ensure_installed = vim.tbl_keys(servers or {})
 
-    vim.list_extend(ensure_installed, LSP_TOOLS)
+    -- vim.list_extend(ensure_installed, LSP_TOOLS)
 
     require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_enable = true })
 
     ---------------------
     -- keybinds
