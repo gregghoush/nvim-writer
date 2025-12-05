@@ -1,4 +1,6 @@
 local sources_default = {
+  "thesaurus",
+  "dictionary",
   "lsp",
   "path",
   "buffer",
@@ -23,6 +25,11 @@ return {
     "saghen/blink.compat",
     "mikavilpas/blink-ripgrep.nvim",
     "dmitmel/cmp-cmdline-history",
+    "archie-judd/blink-cmp-words",
+    {
+      "Kaiser-Yang/blink-cmp-dictionary",
+      dependencies = { "nvim-lua/plenary.nvim" },
+    },
   },
   version = "*",
   lazy = true, -- Make sure the plugin is truly lazy-loaded
@@ -147,11 +154,43 @@ return {
     },
     sources = {
       default = sources_default,
-      per_filetype = {
-        markdown = { "markview" },
-      },
 
       providers = {
+        thesaurus = {
+          name = "blink-cmp-words",
+          module = "blink-cmp-words.thesaurus",
+          -- All available options
+          opts = {
+            -- A score offset applied to returned items.
+            -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
+            score_offset = 0,
+
+            -- Default pointers define the lexical relations listed under each definition,
+            -- see Pointer Symbols below.
+            -- Default is as below ("antonyms", "similar to" and "also see").
+            definition_pointers = { "!", "&", "^" },
+
+            -- The pointers that are considered similar words when using the thesaurus,
+            -- see Pointer Symbols below.
+            -- Default is as below ("similar to", "also see" }
+            similarity_pointers = { "&", "^" },
+
+            -- The depth of similar words to recurse when collecting synonyms. 1 is similar words,
+            -- 2 is similar words of similar words, etc. Increasing this may slow results.
+            similarity_depth = 2,
+          },
+        },
+        dictionary = {
+          module = "blink-cmp-dictionary",
+          name = "Dict",
+          -- Make sure this is at least 2.
+          -- 3 is recommended
+          min_keyword_length = 3,
+          opts = {
+            -- options for blink-cmp-dictionary
+            dictionary_files = { vim.fn.expand("/usr/share/dict/words") },
+          },
+        },
         lsp = {
           name = "lsp",
           module = "blink.cmp.sources.lsp",
@@ -267,6 +306,9 @@ return {
             return items
           end,
         },
+      },
+      per_filetype = {
+        markdown = { "markview", "thesaurus" },
       },
     },
   },

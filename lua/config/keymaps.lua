@@ -97,6 +97,24 @@ vim.defer_fn(function()
 end, 10)
 
 local plug_map = {
+  -- Plugin: zen-mode
+  ["n|<leader>z"] = map_cmd("<CMD>lua require('zen-mode').toggle({window = {width = .75}})<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Toggle zen mode"),
+
+  -- Plugin: actions-preview
+  ["nv|<leader>ca"] = map_callback(function()
+      require("actions-preview").code_actions()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Code Actions"),
+
+  -- Plugin: Markview
+  ["n|<leader>mi"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
+  ["n|<leader>md"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
+
   -- Plugin: conform.nvim
   ["n|<leader>cf"] = map_callback(function()
       require("conform").format({ async = true, lsp_format = "fallback" })
@@ -370,12 +388,6 @@ local plug_map = {
     :with_silent()
     :with_desc("Todo Comments: show TODO"),
 
-  -- Plugin: treewalker
-  ["n|<a-s-j>"] = map_cmd("<CMD>Treewalker Down<CR>"):with_noremap():with_silent():with_desc("Treewalker Down"),
-  ["n|<a-s-k>"] = map_cmd("<CMD>Treewalker Up<CR>"):with_noremap():with_silent():with_desc("Treewalker Up"),
-  ["n|<a-s-h>"] = map_cmd("<CMD>Treewalker Left<CR>"):with_noremap():with_silent():with_desc("Treewalker Left"),
-  ["n|<a-s-l>"] = map_cmd("<CMD>Treewalker Right<CR>"):with_noremap():with_silent():with_desc("Treewalker Right"),
-
   -- Plugin: Trouble
   ["n|<leader>xw"] = map_cmd("<CMD>Trouble diagnostics toggle<CR>")
     :with_noremap()
@@ -459,42 +471,20 @@ local misc_map = {
     :with_silent()
     :with_desc("Toggle inlay hints"),
 
-  -- Removed HelpView keymap - plugin functionality not needed
-
-  -- Plugin: dropbar
-  ["n|<leader>;"] = map_callback(function()
-      require("dropbar.api").pick()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Pick symbols in winbar"),
-  ["n|[;"] = map_callback(function()
-      require("dropbar.api").goto_context_start()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Go to start of current context"),
-  ["n|];"] = map_callback(function()
-      require("dropbar.api").select_next_context()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Select next context"),
-
   -- Folding controls
-  ["n|<leader>z0"] = map_callback(function()
+  ["n|<leader>c0"] = map_callback(function()
       require("utils.ui").toggle_fold_level(0)
     end)
     :with_noremap()
     :with_silent()
     :with_desc("Toggle level 0 folds"),
-  ["n|<leader>z1"] = map_callback(function()
+  ["n|<leader>c1"] = map_callback(function()
       require("utils.ui").toggle_fold_level(1)
     end)
     :with_noremap()
     :with_silent()
     :with_desc("Toggle level 1 folds"),
-  ["n|<leader>z2"] = map_callback(function()
+  ["n|<leader>c2"] = map_callback(function()
       require("utils.ui").toggle_fold_level(2)
     end)
     :with_noremap()
@@ -582,12 +572,13 @@ vim.defer_fn(function()
 
   wk.add({
     mode = "n",
-    -- Claude Code keymaps are now handled by the plugin
     { "<leader>'", desc = "Tide: Open", icon = "󰁕" },
     { "<leader>e", desc = "Picker: Explorer", icon = "" },
     { "<leader>f/", desc = "Yazi: Current file", icon = "" },
     { "<leader>f-", desc = "Yazi: nvim working directory", icon = "󰘦" },
     { "<leader>f\\", desc = "Yazi: Resume first session", icon = "↺" },
+    { "<leader>mi", desc = "Markdown: Increase Heading #", icon = "+" },
+    { "<leader>md", desc = "Markdown: Decrease Heading #", icon = "-" },
     { "<leader>pl", desc = "✓ Lazy: Sync", icon = "󰒲" },
     { "<leader>pp", desc = "Profile: Generate report", icon = "📊" },
     { "<leader>ps", desc = "Profile: Show summary", icon = "📈" },
@@ -620,9 +611,6 @@ vim.defer_fn(function()
     { "<leader>sl", desc = "Load session", icon = "" },
     { "<leader>ss", desc = "Save session", icon = "" },
     { "<leader>sw", desc = "Current session", icon = "" },
-    { "<leader>tS", desc = "Stop (Neotest)", icon = "󰝤" },
-    { "<leader>tT", desc = "TODO (Neotest)", icon = "" },
-    { "<leader>ta", desc = "Code Actions", icon = "" },
     { "<leader>xq", desc = "Trouble: quickfix list", icon = "" },
     { "<leader>xd", desc = "Populate workspace diagnostics", icon = "" },
     { "<leader>xl", desc = "Trouble: location list", icon = "󰀹" },
@@ -659,9 +647,9 @@ vim.defer_fn(function()
   -- Register folding keymaps with which-key
   wk.add({
     mode = "n",
-    { "<leader>z0", desc = "Toggle level 0 folds", icon = "󰈔" },
-    { "<leader>z1", desc = "Toggle level 1 folds", icon = "󰈕" },
-    { "<leader>z2", desc = "Toggle level 2 folds", icon = "󰈖" },
+    { "<leader>c0", desc = "Toggle level 0 folds", icon = "󰈔" },
+    { "<leader>c1", desc = "Toggle level 1 folds", icon = "󰈕" },
+    { "<leader>c2", desc = "Toggle level 2 folds", icon = "󰈖" },
   })
 
   -- Register formatting keymaps with which-key
@@ -683,14 +671,6 @@ vim.defer_fn(function()
   wk.add({
     mode = "n",
     { "<C-a>", desc = "Toggle IDE view", icon = "󰨞" },
-  })
-
-  -- Register dropbar
-  wk.add({
-    mode = "n",
-    { "<leader>;", desc = "Pick symbols in winbar", icon = "󰓡" },
-    { "[;", desc = "Go to start of current context", icon = "󰁍" },
-    { "];", desc = "Select next context", icon = "󰁔" },
   })
 
   -- Register helpview

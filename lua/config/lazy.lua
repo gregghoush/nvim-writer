@@ -122,6 +122,8 @@ require("lazy").setup("plugins", {
   },
 })
 
+require("markview.extras.headings").setup();
+
 -- Record plugin manager stats
 lazy_stats.load_time = os.clock() - plugins_load_start
 lazy_stats.total_plugins = #require("lazy.core.config").plugins

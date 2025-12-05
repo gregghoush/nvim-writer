@@ -167,7 +167,6 @@ This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its p
 - [depsync.nvim](https://github.com/robertazzopardi/depsync.nvim)
 - [diffview.nvim](https://github.com/sindrets/diffview.nvim)
 - [dressing.nvim](https://github.com/stevearc/dressing.nvim)
-- [dropbar.nvim](https://github.com/Bekaboo/dropbar.nvim)
 - [edgy.nvim](https://github.com/folke/edgy.nvim)
 - [flash.nvim](https://github.com/folke/flash.nvim)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
@@ -295,4 +294,3 @@ For a complete development environment setup, see [DEVELOPMENT.md](DEVELOPMENT.m
 <div align="center">
   <p>Made with ❤️ by <a href="https://github.com/greggh">Gregg Housh</a></p>
 </div>
-

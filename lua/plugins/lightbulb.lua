@@ -28,7 +28,6 @@ return {
       ignore = {
         clients = {},
         ft = {
-          "markdown",
           "text",
           "gitcommit",
         },
