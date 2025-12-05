@@ -112,7 +112,8 @@ return {
     -- LSP tools
     ---------------------
     local LSP_TOOLS = {
-      -- "prettier",
+      "prettier",
+      "proselint"
     }
 
     ---------------------
@@ -144,10 +145,11 @@ return {
     -- mason
     ---------------------
     local ensure_installed = vim.tbl_keys(servers or {})
+    local ensure_lsptools_installed = vim.tbl_keys(servers or {})
 
-    -- vim.list_extend(ensure_installed, LSP_TOOLS)
+    vim.list_extend(ensure_lsptools_installed, LSP_TOOLS)
 
-    require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+    require("mason-tool-installer").setup({ ensure_installed = ensure_lsptools_installed })
     require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_enable = true })
 
     ---------------------
