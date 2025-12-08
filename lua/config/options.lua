@@ -4,7 +4,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 ------------------------------------
-vim.g.dashboard_header = require("utils.ui").headers.anonymous
+vim.g.dashboard_header = require("utils.ui").headers.neovim2
 vim.g.ai = require("utils.flags").get_flags("ai") or false
 vim.g.debugger = require("utils.flags").get_flags("debugger") or false
 vim.g.suggestions = require("utils.flags").get_flags("suggestions") or false

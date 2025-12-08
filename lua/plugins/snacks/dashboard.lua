@@ -57,8 +57,28 @@ return {
           { icon = "󰒲 ", key = "<leader>.", desc = " Lazy", action = "<CMD>Lazy sync<CR>" },
           { icon = " ", key = "q", desc = " Quit", action = "<CMD>qa<CR>" },
         },
-
         header = require("utils.ui").get_dashboard_header(vim.g.dashboard_header),
+      },
+      sections = {
+        { section = "keys", gap = 1, padding = 1 },
+        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        {
+          pane = 2,
+          icon = " ",
+          title = "Git Status",
+          section = "terminal",
+          enabled = function()
+            return Snacks.git.get_root() ~= nil
+          end,
+          cmd = "git status --short --branch --renames",
+          height = 5,
+          padding = 1,
+          ttl = 5 * 60,
+          indent = 3,
+        },
+        -- { section = "header", pane = 2 },
+        -- { section = "startup" },
       },
     },
   },

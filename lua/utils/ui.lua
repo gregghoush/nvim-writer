@@ -13,9 +13,8 @@ end
 
 M.headers = {
   anonymous = "anonymous.cat",
-  eagle = "eagle.cat",
   neovim = "neovim.cat",
-  hack = "hack.cat",
+  neovim2 = "neovim2.cat",
 }
 
 local function get_header(header)
