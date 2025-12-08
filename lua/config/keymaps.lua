@@ -97,6 +97,12 @@ vim.defer_fn(function()
 end, 10)
 
 local plug_map = {
+  -- Markdown Specific
+  ["n|<leader>mo"] = map_cmd("<CMD>Trouble symbols toggle win.position=right<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Outline"),
+
   -- Plugin: zen-mode
   ["n|<leader>z"] = map_cmd("<CMD>lua require('zen-mode').toggle({window = {width = .75}})<CR>")
     :with_noremap()
@@ -371,9 +377,6 @@ local plug_map = {
     :with_silent()
     :with_desc("Surround: Replace"),
 
-  -- Plugin: outline
-  ["n|<leader>lo"] = map_cmd("<CMD>Outline<CR>"):with_noremap():with_silent():with_desc("Toggle Outline"),
-
   -- Plugin: Suda
   ["n|<leader>qS"] = map_cmd("<CMD>Suda w<CR>"):with_noremap():with_silent():with_desc("Suda: Write"),
   ["n|<leader>qv"] = map_cmd("<CMD>Suda wq<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit"),
@@ -635,7 +638,7 @@ vim.defer_fn(function()
     { "<leader>wj", desc = "Move window down", icon = "↓" },
     { "<leader>wk", desc = "Move window up", icon = "↑" },
     { "<leader>wl", desc = "Move window right", icon = "→" },
-    { "<leader>lo", desc = "Toggle Outline", icon = "󰌗" },
+    { "<leader>mo", desc = "Toggle Outline", icon = "󰌗" },
     { "<leader>ca", desc = "Code Actions", icon = "" },
     { "<leader>fR", desc = "Rename file", icon = "󰬶" },
     { "<leader>wtn", desc = "Create a new tab", icon = "+" },

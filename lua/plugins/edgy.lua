@@ -21,13 +21,12 @@ return {
     right = {
       -- { ft = "Avante", title = "Avante", size = { width = 0.5 } },
       { ft = "grug-far", title = "Search & Replace", size = { width = 0.5 } },
-      { ft = "Outline", title = "Outline", size = { width = 0.2 } },
       {
         ft = "trouble",
         title = "Trouble Symbols",
         pinned = true,
         collapsed = false,
-        size = { height = 0.6, width = 0.15 },
+        size = { height = 0.6, width = 0.35 },
         open = "Trouble symbols toggle win.position=right",
         filter = trouble_filter("right"),
       },
