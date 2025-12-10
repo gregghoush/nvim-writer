@@ -52,7 +52,6 @@ return {
         },
       },
       bashls = {},
-      marksman = {},
       ltex_plus = {
         cmd = { 'ltex-ls-plus' },
         language = "en",

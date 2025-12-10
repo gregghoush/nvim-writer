@@ -214,7 +214,6 @@ This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its p
 - [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)
-- [outline.nvim](https://github.com/hedyhli/outline.nvim)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [quicker.nvim](https://github.com/stevearc/quicker.nvim)
 - [rainbow-delimiters.nvim](https://github.com/HiPhish/rainbow-delimiters.nvim)
