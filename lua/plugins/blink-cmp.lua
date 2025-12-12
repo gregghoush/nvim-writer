@@ -22,6 +22,7 @@ return {
   "saghen/blink.cmp",
   event = { "InsertEnter" },
   dependencies = {
+    "allaman/emoji.nvim",
     "saghen/blink.compat",
     "mikavilpas/blink-ripgrep.nvim",
     "dmitmel/cmp-cmdline-history",
@@ -156,6 +157,18 @@ return {
       default = sources_default,
 
       providers = {
+        emoji = {
+          name = "emoji",
+          module = "blink.compat.source",
+          -- overwrite kind of suggestion
+          transform_items = function(ctx, items)
+            local kind = require("blink.cmp.types").CompletionItemKind.Text
+            for i = 1, #items do
+              items[i].kind = kind
+            end
+            return items
+          end,
+        },
         thesaurus = {
           name = "blink-cmp-words",
           module = "blink-cmp-words.thesaurus",

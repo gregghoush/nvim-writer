@@ -122,7 +122,9 @@ require("lazy").setup("plugins", {
   },
 })
 
-require("markview.extras.headings").setup();
+require("markview.extras.headings").setup()
+require("markview.extras.checkboxes").setup()
+require("markview.extras.editor").setup()
 
 -- Record plugin manager stats
 lazy_stats.load_time = os.clock() - plugins_load_start

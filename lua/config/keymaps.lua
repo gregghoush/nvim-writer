@@ -16,6 +16,12 @@ local function get_snacks()
   return Snacks
 end
 
+local definition_in_split = function()
+  vim.api.nvim_command("vsp")
+  lsp.buf.definition()
+  vim.api.nvim_command("normal zz")
+end
+
 local builtin_map = {
 
   -- fix stupid typo
@@ -98,10 +104,66 @@ end, 10)
 
 local plug_map = {
   -- Markdown Specific
-  ["n|<leader>mo"] = map_cmd("<CMD>Trouble symbols toggle win.position=right<CR>")
+  ["n|<leader>mo"] = map_cmd("<cmd>trouble symbols toggle win.position=right<cr>")
     :with_noremap()
     :with_silent()
-    :with_desc("Outline"),
+    :with_desc("Sidebar Outline"),
+  ["n|<leader>mto"] = map_cmd("<CMD>IWE telescope headers<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Telescope Outline"),
+  ["n|<F2>"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
+  ["n|<leader>mp"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
+  ["n|<F3>"] = map_cmd("<cmd>Markview splitToggle<cr>"):with_noremap():with_silent():with_desc("Toggle Split View"),
+  ["n|<leader>ms"] = map_cmd("<cmd>Markview splitToggle<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Toggle Split View"),
+  ["n|<F5>"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
+  ["n|<F6>"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
+  ["n|<leader>mhi"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
+  ["n|<leader>mhd"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
+  -- ["n|<CR>"] = map_callback(function()
+  --     vim.lsp.buf.definition()
+  --   end)
+  --   :with_noremap()
+  --   :with_silent()
+  --   :with_desc("GoTo Definition/Link"),
+  ["n|<C-CR>"] = map_callback(function()
+      definitio_in_split()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("GoTo Definition/Link in Split"),
+  ["n|<Tab>"] = map_cmd("<Plug>(iwe-link-next)"):with_noremap():with_silent():with_desc("Next Link"),
+  ["n|<S-Tab>"] = map_cmd("<Plug>(iwe-link-prev)"):with_noremap():with_silent():with_desc("Previous Link"),
+  ["n|<leader>mr"] = map_cmd("<cmd>IWE telescope backlinks<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("List References"),
+  ["n|<leader>mc"] = map_cmd("<cmd>Checkbox toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Checkbox"),
+  ["n|<leader>mec"] = map_cmd("<cmd>Editor create<cr>"):with_noremap():with_silent():with_desc("Codebox: Create"),
+  ["n|<leader>mee"] = map_cmd("<cmd>Editor edit<cr>"):with_noremap():with_silent():with_desc("Codebox: Edit"),
+  ["n|<leader>mk"] = map_callback(function()
+      vim.lsp.buf.hover()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Show Hover Box"),
+  ["n|<leader>mi"] = map_cmd("<cmd><cr>"):with_noremap():with_silent():with_desc("GoTo Index"),
+  ["n|<leader>mlr"] = map_callback(function()
+      vim.lsp.buf.rename()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Rename link/file"),
+  ["n|<leader>mwf"] = map_cmd("<cmd>IWE telescope find_files<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Wiki Find Files"),
+  ["n|<leader>mwp"] = map_cmd("<cmd>IWE telescope paths<cr>"):with_noremap():with_silent():with_desc("Wiki Paths"),
+  ["n|<leader>mwr"] = map_cmd("<cmd>IWE telescope roots<cr>"):with_noremap():with_silent():with_desc("Wiki Roots"),
+  ["n|<leader>mwg"] = map_cmd("<cmd>IWE telescope grep<cr>"):with_noremap():with_silent():with_desc("Wiki Grep"),
 
   -- Plugin: zen-mode
   ["n|<leader>z"] = map_cmd("<CMD>lua require('zen-mode').toggle({window = {width = .75}})<CR>")
@@ -116,10 +178,6 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Code Actions"),
-
-  -- Plugin: Markview
-  ["n|<leader>mi"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
-  ["n|<leader>md"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
 
   -- Plugin: conform.nvim
   ["n|<leader>cf"] = map_callback(function()
@@ -580,8 +638,6 @@ vim.defer_fn(function()
     { "<leader>f/", desc = "Yazi: Current file", icon = "" },
     { "<leader>f-", desc = "Yazi: nvim working directory", icon = "󰘦" },
     { "<leader>f\\", desc = "Yazi: Resume first session", icon = "↺" },
-    { "<leader>mi", desc = "Markdown: Increase Heading #", icon = "+" },
-    { "<leader>md", desc = "Markdown: Decrease Heading #", icon = "-" },
     { "<leader>pl", desc = "✓ Lazy: Sync", icon = "󰒲" },
     { "<leader>pp", desc = "Profile: Generate report", icon = "📊" },
     { "<leader>ps", desc = "Profile: Show summary", icon = "📈" },
@@ -645,6 +701,28 @@ vim.defer_fn(function()
     { "<leader>wth", desc = "Move to next tab", icon = "" },
     { "<leader>wtl", desc = "Move to previous tab", icon = "" },
     { "<leader>wtc", desc = "Only keep current tab", icon = "" },
+  })
+
+  -- Register Markdown specific keys
+  wk.add({
+    mode = "n",
+    { "<leader>mo", desc = "Toggle Sidebar Outline", icon = "" },
+    { "<leader>mto", desc = "Toggle Telescope Outline", icon = "" },
+    { "<leader>mhi", desc = "Increase Heading #", icon = "" },
+    { "<leader>mhd", desc = "Decrease Heading #", icon = "" },
+    { "<leader>mp", desc = "Toggle Preview", icon = "" },
+    { "<leader>ms", desc = "Toggle Split View", icon = "" },
+    { "<leader>mr", desc = "List References", icon = "" },
+    { "<leader>mc", desc = "Toggle Checkbox", icon = "" },
+    { "<leader>mec", desc = "Box Editor: Create", icon = "" },
+    { "<leader>mee", desc = "Box Editor: Edit", icon = "" },
+    { "<leader>mi", desc = "GoTo Index", icon = "" },
+    { "<leader>mlr", desc = "LSP Rename", icon = "" },
+    { "<leader>mk", desc = "Show Hover", icon = "" },
+    { "<leader>mwf", desc = "Wiki Find Files", icon = "" },
+    { "<leader>mwp", desc = "Wiki Paths", icon = "" },
+    { "<leader>mwr", desc = "Wiki Roots", icon = "" },
+    { "<leader>mwg", desc = "Wiki Grep", icon = "" },
   })
 
   -- Register folding keymaps with which-key

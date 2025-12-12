@@ -1,11 +1,11 @@
 local language_id_mapping = {
-  bib = 'bibtex',
-  pandoc = 'markdown',
-  plaintex = 'tex',
-  rnoweb = 'rsweave',
-  rst = 'restructuredtext',
-  tex = 'latex',
-  text = 'plaintext',
+  bib = "bibtex",
+  pandoc = "markdown",
+  plaintex = "tex",
+  rnoweb = "rsweave",
+  rst = "restructuredtext",
+  tex = "latex",
+  text = "plaintext",
 }
 
 return {
@@ -51,56 +51,93 @@ return {
           },
         },
       },
+      yamlls = {},
+      html = {},
+      jsonls = {},
+      lua_ls = {
+        settings = {
+          lua = {
+            diagnostics = {
+              globals = { "vim", "snacks" },
+            },
+            completion = {
+              callsnippet = "replace",
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkthirdparty = false,
+            },
+          },
+        },
+      },
+      emmet_language_server = {
+        fileeypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "php" },
+      },
+      cssls = {},
       bashls = {},
+      eslint_d = {
+        root_dir = vim.fs.root(0, { "package.json", ".eslintrc.json", ".eslintrc.js", ".git" }),
+        filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
+        flags = os.getenv("DEBOUNCE_ESLINT") and {
+          allow_incremental_sync = true,
+          debounce_text_changes = 1000,
+        } or nil,
+        on_attach = function(_, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+          })
+        end,
+      },
       ltex_plus = {
-        cmd = { 'ltex-ls-plus' },
+        cmd = { "ltex-ls-plus" },
         language = "en",
         filetypes = {
-          'bib',
-          'context',
-          'gitcommit',
-          'html',
-          'markdown',
-          'org',
-          'pandoc',
-          'plaintex',
-          'quarto',
-          'mail',
-          'mdx',
-          'rmd',
-          'rnoweb',
-          'rst',
-          'tex',
-          'text',
-          'typst',
-          'xhtml',
+          "bib",
+          "context",
+          "gitcommit",
+          "html",
+          "markdown",
+          "org",
+          "pandoc",
+          "plaintex",
+          "quarto",
+          "mail",
+          "mdx",
+          "rmd",
+          "rnoweb",
+          "rst",
+          "tex",
+          "text",
+          "typst",
+          "xhtml",
         },
-        root_markers = { '.git' },
+        root_markers = { ".git" },
         get_language_id = function(_, filetype)
           return language_id_mapping[filetype] or filetype
         end,
         settings = {
           ltex = {
             enabled = {
-              'bib',
-              'context',
-              'gitcommit',
-              'html',
-              'markdown',
-              'org',
-              'pandoc',
-              'plaintex',
-              'quarto',
-              'mail',
-              'mdx',
-              'rmd',
-              'rnoweb',
-              'rst',
-              'tex',
-              'latex',
-              'text',
-              'typst',
-              'xhtml',
+              "bib",
+              "context",
+              "gitcommit",
+              "html",
+              "markdown",
+              "org",
+              "pandoc",
+              "plaintex",
+              "quarto",
+              "mail",
+              "mdx",
+              "rmd",
+              "rnoweb",
+              "rst",
+              "tex",
+              "latex",
+              "text",
+              "typst",
+              "xhtml",
             },
           },
         },
@@ -111,8 +148,9 @@ return {
     -- LSP tools
     ---------------------
     local LSP_TOOLS = {
-      "prettier",
-      "proselint"
+      mmdc = {},
+      prettier = {},
+      proselint = {},
     }
 
     ---------------------
@@ -275,10 +313,10 @@ return {
           ["n|<leader>lz"] = map_cr("LspRestart"):with_noremap():with_silent():with_desc("Restart LSP"),
         }
 
-        bind.nvim_load_mapping(lsp_map)
+        -- bind.nvim_load_mapping(lsp_map)
 
         opts.desc = "Smart rename"
-        vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<F4>", vim.lsp.buf.rename, opts)
       end,
     })
 
