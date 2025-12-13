@@ -30,6 +30,8 @@ return {
     ---------------------
     -- lsp servers
     ---------------------
+    local util = require 'lspconfig.util'
+
     local servers = {
       harper_ls = {
         enabled = true,
@@ -75,23 +77,26 @@ return {
       },
       cssls = {},
       bashls = {},
-      eslint_d = {
-        root_dir = vim.fs.root(0, { "package.json", ".eslintrc.json", ".eslintrc.js", ".git" }),
-        filetypes = { "javascript", "typescript", "typescriptreact", "javascriptreact" },
-        flags = os.getenv("DEBOUNCE_ESLINT") and {
-          allow_incremental_sync = true,
-          debounce_text_changes = 1000,
-        } or nil,
-        on_attach = function(_, bufnr)
-          vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-          })
+      oxlint = {
+        cmd = { "oxc_language_server" },
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+        workspace_required = true,
+        root_dir = function(bufnr, on_dir)
+          local fname = vim.api.nvim_buf_get_name(bufnr)
+          local root_markers = util.insert_package_json({ ".oxlintrc.json" }, "oxlint", fname)
+          on_dir(vim.fs.dirname(vim.fs.find(root_markers, { path = fname, upward = true })[1]))
         end,
       },
       ltex_plus = {
         cmd = { "ltex-ls-plus" },
-        language = "en",
+        language = "en-US",
         filetypes = {
           "bib",
           "context",
@@ -182,12 +187,17 @@ return {
     -- mason
     ---------------------
     local ensure_installed = vim.tbl_keys(servers or {})
-    local ensure_lsptools_installed = vim.tbl_keys(servers or {})
+    local ensure_lsptools_installed = vim.tbl_keys(LSP_TOOLS or {})
 
-    vim.list_extend(ensure_lsptools_installed, LSP_TOOLS)
+    -- vim.list_extend(ensure_lsptools_installed, LSP_TOOLS)
 
     require("mason-tool-installer").setup({ ensure_installed = ensure_lsptools_installed })
-    require("mason-lspconfig").setup({ ensure_installed = ensure_installed, automatic_enable = true })
+    local lspconfig = require("mason-lspconfig")
+
+    lspconfig.setup({
+      ensure_installed = ensure_installed,
+      automatic_enable = true,
+    })
 
     ---------------------
     -- keybinds
@@ -196,10 +206,31 @@ return {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(event)
         local opts = { buffer = event.buf, silent = true }
+        local client = assert(vim.lsp.get_client_by_id(event.data.client_id))
         local bind = require("utils.keymap-bind")
         local map_cr = bind.map_cr
         local map_callback = bind.map_callback
         local Snacks = require("snacks")
+        if client.name == "ltex_plus" then
+          -- vim.notify("ltex_plus on_attach has happened.", vim.log.levels.ERROR)
+
+          require("ltex_extra").setup({
+            -- table <string> : languages for witch dictionaries will be loaded, e.g. { "es-AR", "en-US" }
+            -- https://valentjn.github.io/ltex/supported-languages.html#natural-languages
+            load_langs = { "en-US" },
+            -- boolean : whether to load dictionaries on startup
+            init_check = true,
+            -- string : relative or absolute path to store dictionaries
+            -- e.g. subfolder in the project root or the current working directory: ".ltex"
+            -- e.g. shared files for all projects:  vim.fn.expand("~") .. "/.local/share/ltex"
+            path = vim.fn.expand("~") .. "/.config/nvim-writer/ltex", -- project root or current working directory
+            -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
+            log_level = "none",
+            -- table : configurations of the ltex language server.
+            -- Only if you are calling the server from ltex_extra
+            server_opts = nil,
+          })
+        end
         local lsp_map = {
           ["n|gr"] = map_callback(function()
               Snacks.picker.lsp_references()
@@ -299,13 +330,13 @@ return {
             :with_silent()
             :with_desc("Show line diagnostics"),
           ["n|<leader>l["] = map_callback(function()
-              vim.diagnostic.goto_prev()
+              vim.diagnostic.jump({ count = -1 })
             end)
             :with_noremap()
             :with_silent()
             :with_desc("Go to previous diagnostic"),
           ["n|<leader>l]"] = map_callback(function()
-              vim.diagnostic.goto_next()
+              vim.diagnostic.jump({ count = 1 })
             end)
             :with_noremap()
             :with_silent()
@@ -313,7 +344,7 @@ return {
           ["n|<leader>lz"] = map_cr("LspRestart"):with_noremap():with_silent():with_desc("Restart LSP"),
         }
 
-        -- bind.nvim_load_mapping(lsp_map)
+        bind.nvim_load_mapping(lsp_map)
 
         opts.desc = "Smart rename"
         vim.keymap.set("n", "<F4>", vim.lsp.buf.rename, opts)

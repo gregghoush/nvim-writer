@@ -104,7 +104,7 @@ end, 10)
 
 local plug_map = {
   -- Markdown Specific
-  ["n|<leader>mo"] = map_cmd("<cmd>trouble symbols toggle win.position=right<cr>")
+  ["n|<leader>mo"] = map_cmd("<cmd>Trouble symbols toggle win.position=right<cr>")
     :with_noremap()
     :with_silent()
     :with_desc("Sidebar Outline"),
@@ -112,6 +112,19 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Telescope Outline"),
+  ["n|<leader>mdh"] = map_cmd("<CMD>MDHeaders<CR>"):with_noremap():with_silent():with_desc("Markdown Headers"),
+  ["n|<leader>mdc"] = map_cmd("<CMD>MDHeadersCurrent<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Markdown Current Headers"),
+  ["n|<leader>mdq"] = map_cmd("<CMD>MDHeadersQuickfix<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Markdown QuickFix Headers"),
+  ["n|<leader>mdt"] = map_cmd("<CMD>MDHeadersTelescope<CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Markdown Telescope Headers"),
   ["n|<F2>"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
   ["n|<leader>mp"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
   ["n|<F3>"] = map_cmd("<cmd>Markview splitToggle<cr>"):with_noremap():with_silent():with_desc("Toggle Split View"),
@@ -129,19 +142,19 @@ local plug_map = {
   --   :with_noremap()
   --   :with_silent()
   --   :with_desc("GoTo Definition/Link"),
-  ["n|<C-CR>"] = map_callback(function()
-      definitio_in_split()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("GoTo Definition/Link in Split"),
-  ["n|<Tab>"] = map_cmd("<Plug>(iwe-link-next)"):with_noremap():with_silent():with_desc("Next Link"),
-  ["n|<S-Tab>"] = map_cmd("<Plug>(iwe-link-prev)"):with_noremap():with_silent():with_desc("Previous Link"),
+  -- ["n|<C-CR>"] = map_callback(function()
+  --     definitio_in_split()
+  --   end)
+  --   :with_noremap()
+  --   :with_silent()
+  --   :with_desc("GoTo Definition/Link in Split"),
+  -- ["n|<Tab>"] = map_cmd("<Plug>(iwe-link-next)"):with_noremap():with_silent():with_desc("Next Link"),
+  -- ["n|<S-Tab>"] = map_cmd("<Plug>(iwe-link-prev)"):with_noremap():with_silent():with_desc("Previous Link"),
   ["n|<leader>mr"] = map_cmd("<cmd>IWE telescope backlinks<cr>")
     :with_noremap()
     :with_silent()
     :with_desc("List References"),
-  ["n|<leader>mc"] = map_cmd("<cmd>Checkbox toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Checkbox"),
+  -- ["n|<leader>mc"] = map_cmd("<cmd>Checkbox toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Checkbox"),
   ["n|<leader>mec"] = map_cmd("<cmd>Editor create<cr>"):with_noremap():with_silent():with_desc("Codebox: Create"),
   ["n|<leader>mee"] = map_cmd("<cmd>Editor edit<cr>"):with_noremap():with_silent():with_desc("Codebox: Edit"),
   ["n|<leader>mk"] = map_callback(function()
@@ -150,7 +163,7 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Show Hover Box"),
-  ["n|<leader>mi"] = map_cmd("<cmd><cr>"):with_noremap():with_silent():with_desc("GoTo Index"),
+  -- ["n|<leader>mi"] = map_cmd("<cmd><cr>"):with_noremap():with_silent():with_desc("GoTo Index"),
   ["n|<leader>mlr"] = map_callback(function()
       vim.lsp.buf.rename()
     end)
@@ -164,6 +177,18 @@ local plug_map = {
   ["n|<leader>mwp"] = map_cmd("<cmd>IWE telescope paths<cr>"):with_noremap():with_silent():with_desc("Wiki Paths"),
   ["n|<leader>mwr"] = map_cmd("<cmd>IWE telescope roots<cr>"):with_noremap():with_silent():with_desc("Wiki Roots"),
   ["n|<leader>mwg"] = map_cmd("<cmd>IWE telescope grep<cr>"):with_noremap():with_silent():with_desc("Wiki Grep"),
+  ["n|<leader>mwi"] = map_cmd("<cmd>lua require('neowiki').open_wiki()<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Open Wiki"),
+  ["n|<leader>mww"] = map_cmd("<cmd>lua require('neowiki').open_wiki_floating()<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Open Wiki in Floating Window"),
+  ["n|<leader>mwt"] = map_cmd("<cmd>lua require('neowiki').open_wiki_new_tab()<cr>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Open Wiki in Tab"),
 
   -- Plugin: zen-mode
   ["n|<leader>z"] = map_cmd("<CMD>lua require('zen-mode').toggle({window = {width = .75}})<CR>")
@@ -633,6 +658,16 @@ vim.defer_fn(function()
 
   wk.add({
     mode = "n",
+    { "<leader>lr", desc = "LSP: Show references", icon = "" },
+    { "<leader>lk", desc = "LSP: Go to declaration", icon = "" },
+    { "<leader>ld", desc = "LSP: Show definitions", icon = "" },
+    { "<leader>li", desc = "LSP: Show implementations", icon = "" },
+    { "<leader>lt", desc = "LSP: Show type definitions", icon = "" },
+    { "<leader>lb", desc = "LSP: Show buffer diagnostics", icon = "" },
+    { "<leader>ll", desc = "LSP: Show line diagnostics", icon = "" },
+    { "<leader>l[", desc = "LSP: Go to Previous Diagnostic", icon = "" },
+    { "<leader>l]", desc = "LSP: Go to Next Diagnostic", icon = "" },
+    { "<leader>lz", desc = "LSP: Restart LSP", icon = "" },
     { "<leader>'", desc = "Tide: Open", icon = "󰁕" },
     { "<leader>e", desc = "Picker: Explorer", icon = "" },
     { "<leader>f/", desc = "Yazi: Current file", icon = "" },
@@ -716,12 +751,20 @@ vim.defer_fn(function()
     { "<leader>mc", desc = "Toggle Checkbox", icon = "" },
     { "<leader>mec", desc = "Box Editor: Create", icon = "" },
     { "<leader>mee", desc = "Box Editor: Edit", icon = "" },
-    { "<leader>mi", desc = "GoTo Index", icon = "" },
+    { "<leader>mi", desc = "Go to Index", icon = "" },
     { "<leader>mlr", desc = "LSP Rename", icon = "" },
     { "<leader>mk", desc = "Show Hover", icon = "" },
     { "<leader>mwf", desc = "Wiki Find Files", icon = "" },
     { "<leader>mwp", desc = "Wiki Paths", icon = "" },
     { "<leader>mwr", desc = "Wiki Roots", icon = "" },
+    { "<leader>mwg", desc = "Wiki Grep", icon = "" },
+    { "<leader>mwi", desc = "Open Wiki", icon = "" },
+    { "<leader>mww", desc = "Open Wiki in Floating Window", icon = "" },
+    { "<leader>mwt", desc = "Open Wiki in Tab", icon = "" },
+    { "<leader>mwd", desc = "Delete Wiki Page", icon = "" },
+    { "<leader>mwl", desc = "Insert Wiki Link", icon = "" },
+    { "<leader>mwc", desc = "Remove (cleanup) Bad Links", icon = "" },
+    { "<leader>mwg", desc = "Wiki Grep", icon = "" },
     { "<leader>mwg", desc = "Wiki Grep", icon = "" },
   })
 

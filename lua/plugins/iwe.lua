@@ -1,7 +1,3 @@
-local filetypes = {
-  "markdown",
-}
-
 return {
   "iwe-org/iwe.nvim",
   dependencies = {
@@ -10,6 +6,8 @@ return {
   },
   config = function()
     require("iwe").setup({
+      ft = { "markdown" },
+      filetypes = { "markdown" },
       lsp = {
         cmd = { "iwes" },
         name = "iwes",
@@ -18,7 +16,7 @@ return {
         enable_inlay_hints = true,
       },
       mappings = {
-        enable_markdown_mappings = true,
+        enable_markdown_mappings = false,
         enable_telescope_keybindings = false,
         enable_lsp_keybindings = false,
         leader = "<leader>",

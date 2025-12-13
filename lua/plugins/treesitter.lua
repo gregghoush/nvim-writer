@@ -16,6 +16,7 @@ return {
     treesitter.setup({
       auto_install = true,
       ensure_installed = {
+        "html",
         "regex",
         "diff",
         "markdown",

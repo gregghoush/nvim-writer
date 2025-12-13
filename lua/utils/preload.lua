@@ -112,11 +112,11 @@ function M.preload_filetype_modules(filetype)
     },
     javascript = {
       "tsserver",
-      "eslint",
+      "oxlint",
     },
     typescript = {
       "tsserver",
-      "eslint",
+      "oxlint",
     },
     go = {
       "gopls",
