@@ -30,7 +30,7 @@ return {
     ---------------------
     -- lsp servers
     ---------------------
-    local util = require 'lspconfig.util'
+    local util = require("lspconfig.util")
 
     local servers = {
       harper_ls = {
@@ -223,7 +223,7 @@ return {
             -- string : relative or absolute path to store dictionaries
             -- e.g. subfolder in the project root or the current working directory: ".ltex"
             -- e.g. shared files for all projects:  vim.fn.expand("~") .. "/.local/share/ltex"
-            path = vim.fn.expand("~") .. "/.config/nvim-writer/ltex", -- project root or current working directory
+            path = require("utils.common").get_iwe_root() .. "/.ltex", -- project root or current working directory
             -- string : "none", "trace", "debug", "info", "warn", "error", "fatal"
             log_level = "none",
             -- table : configurations of the ltex language server.
