@@ -136,12 +136,12 @@ local plug_map = {
   ["n|<F6>"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
   ["n|<leader>mhi"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
   ["n|<leader>mhd"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
-  -- ["n|<CR>"] = map_callback(function()
-  --     vim.lsp.buf.definition()
-  --   end)
-  --   :with_noremap()
-  --   :with_silent()
-  --   :with_desc("GoTo Definition/Link"),
+  ["n|<CR>"] = map_callback(function()
+      vim.lsp.buf.definition()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("GoTo Definition/Link"),
   -- ["n|<C-CR>"] = map_callback(function()
   --     definitio_in_split()
   --   end)

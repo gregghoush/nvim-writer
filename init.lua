@@ -112,6 +112,18 @@ vim.api.nvim_create_autocmd("User", {
   once = true,
 })
 
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.md.md" },
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local filename = vim.api.nvim_buf_get_name(buf)
+    -- vim.notify(".md.md file open caught: \n" .. filename, vim.log.levels.ERROR)
+    local newfile = string.gsub(filename, "%.md.md$", ".md")
+    vim.cmd("edit " .. newfile)
+    vim.bo.filetype = "markdown"
+  end,
+})
+
 -- Preload common modules in the background after a small delay
 if timing.flags.preload_enabled then
   vim.defer_fn(function()
