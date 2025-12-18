@@ -1,3 +1,5 @@
+local git = require("utils.git")
+
 return {
   "snacks.nvim",
   opts = {
@@ -31,8 +33,7 @@ return {
             key = "<leader>fg",
             desc = " Grep text",
             action = function()
-              local Snacks = require("snacks")
-              Snacks.dashboard.pick("live_grep")
+              require("telescope.builtin").live_grep({ cwd = git.get_workspace_root() })
             end,
           },
           {

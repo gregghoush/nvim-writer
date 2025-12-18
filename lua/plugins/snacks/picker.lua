@@ -5,82 +5,82 @@ local picker_utils = require("utils.snacks.picker")
 return {
   "snacks.nvim",
   keys = {
-    {
-      "<leader>ff",
-      function()
-        if git.is_git_repo() then
-          return Snacks.picker.git_files({ cwd = git.get_workspace_root() })
-        end
+    -- {
+    --   "<leader>ff",
+    --   function()
+    --     if git.is_git_repo() then
+    --       return Snacks.picker.git_files({ cwd = git.get_workspace_root() })
+    --     end
 
-        Snacks.picker.files({ cwd = git.get_workspace_root() })
-      end,
-      desc = "Picker: find files",
-    },
-    {
-      "<leader>fg",
-      function()
-        Snacks.picker.grep({ cwd = git.get_workspace_root() })
-      end,
-      desc = "Picker: grep",
-    },
-    {
-      "<leader>fr",
-      function()
-        Snacks.picker.recent()
-      end,
-      desc = "Picker: recent",
-    },
-    {
-      "<leader>fs",
-      function()
-        Snacks.picker.smart()
-      end,
-      desc = "Picker: Smart",
-    },
-    {
-      "<leader>fh",
-      function()
-        Snacks.picker.help()
-      end,
-      desc = "Picker: help",
-    },
-    {
-      "<leader>fb",
-      function()
-        Snacks.picker.grep_buffers()
-      end,
-      desc = "Picker: grep buffers",
-    },
-    {
+    --     Snacks.picker.files({ cwd = git.get_workspace_root() })
+    --   end,
+    --   desc = "Picker: find files",
+    -- },
+    -- {
+    --   "<leader>fg",
+    --   function()
+    --     Snacks.picker.grep({ cwd = git.get_workspace_root() })
+    --   end,
+    --   desc = "Picker: grep",
+    -- },
+    -- {
+    --   "<leader>fr",
+    --   function()
+    --     Snacks.picker.recent()
+    --   end,
+    --   desc = "Picker: recent",
+    -- },
+    -- {
+    --   "<leader>fs",
+    --   function()
+    --     Snacks.picker.smart()
+    --   end,
+    --   desc = "Picker: Smart",
+    -- },
+    -- {
+    --   "<leader>fh",
+    --   function()
+    --     Snacks.picker.help()
+    --   end,
+    --   desc = "Picker: help",
+    -- },
+    -- {
+    --   "<leader>fb",
+    --   function()
+    --     Snacks.picker.grep_buffers()
+    --   end,
+    --   desc = "Picker: grep buffers",
+    -- },
+    -- {
 
-      "<leader><leader>",
-      function()
-        Snacks.picker.buffers()
-      end,
-      desc = "Picker: buffers",
-    },
-    {
-      "<leader>cc",
-      function()
-        ---@diagnostic disable-next-line: assign-type-mismatch
-        Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
-      end,
-      desc = "Picker: nvim config",
-    },
-    {
-      "<leader>fu",
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = "Picker: resume",
-    },
-    {
-      "<leader>fP",
-      function()
-        Snacks.picker.pickers()
-      end,
-      desc = "Picker: pickers",
-    },
+    --   "<leader><leader>",
+    --   function()
+    --     Snacks.picker.buffers()
+    --   end,
+    --   desc = "Picker: buffers",
+    -- },
+    -- {
+    --   "<leader>cc",
+    --   function()
+    --     ---@diagnostic disable-next-line: assign-type-mismatch
+    --     Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+    --   end,
+    --   desc = "Picker: nvim config",
+    -- },
+    -- {
+    --   "<leader>fu",
+    --   function()
+    --     Snacks.picker.resume()
+    --   end,
+    --   desc = "Picker: resume",
+    -- },
+    -- {
+    --   "<leader>fP",
+    --   function()
+    --     Snacks.picker.pickers()
+    --   end,
+    --   desc = "Picker: pickers",
+    -- },
     {
       "<leader>fp",
       function()
@@ -88,13 +88,13 @@ return {
       end,
       desc = "Picker: projects",
     },
-    {
-      "<leader>fl",
-      function()
-        Snacks.picker.lines()
-      end,
-      desc = "Picker: lines",
-    },
+    -- {
+    --   "<leader>fl",
+    --   function()
+    --     Snacks.picker.lines()
+    --   end,
+    --   desc = "Picker: lines",
+    -- },
   },
   opts = {
     picker = {
