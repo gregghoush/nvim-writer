@@ -24,6 +24,18 @@ return {
         -- "neo-tree",
         -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
       }, -- "float_win", "toggleterm", "telescope", "which-key", "renamer", "neo-tree", "nvim-tree", "bufferline"
+      override = function(c)
+        local hp = require("monokai-pro.color_helper")
+        local common_fg = hp.lighten(c.sideBar.foreground, 30)
+        return {
+          SnacksPicker = { bg = c.editor.background, fg = common_fg },
+          SnacksPickerBorder = { bg = c.editor.background, fg = c.tab.unfocusedActiveBorder },
+          SnacksPickerTree = { fg = c.editorLineNumber.foreground },
+          NonText = { fg = c.base.dimmed2 }, -- not sure if this should be broken into all hl groups importing NonText
+          -- SnacksPickerDirectory = { fg = c.editorLineNumber.foreground },
+          SnacksPickerDirectory = { fg = common_fg },
+        }
+      end,
       plugins = {
         bufferline = {
           underline_selected = false,
