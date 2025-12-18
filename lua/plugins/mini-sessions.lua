@@ -22,10 +22,6 @@ return {
           if diffview.get_current_view() then
             vim.cmd.DiffviewClose()
           end
-
-          if vim.g.debugger and dap.session() ~= nil then
-            dapui.close()
-          end
         end,
         delete = nil,
       },

@@ -6,9 +6,7 @@ vim.g.maplocalleader = " "
 ------------------------------------
 vim.g.dashboard_header = require("utils.ui").headers.neovim2
 vim.g.ai = require("utils.flags").get_flags("ai") or false
-vim.g.debugger = require("utils.flags").get_flags("debugger") or false
 vim.g.suggestions = require("utils.flags").get_flags("suggestions") or false
-vim.g.tests = require("utils.flags").get_flags("tests") or false
 vim.g.ide_view_open = false
 vim.g.current_session = nil
 vim.g.ignore_filetypes = {

@@ -135,7 +135,7 @@ local function format_label(flag, value)
     default = function()
       label = label .. " (" .. tostring(value) .. ")"
     end,
-  };
+  }
 
   (type_handlers[type(value)] or type_handlers.default)()
 
