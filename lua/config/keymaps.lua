@@ -452,26 +452,6 @@ local plug_map = {
     :with_silent()
     :with_desc("Current session"),
 
-  -- Plugin: mini-surround
-  ["n|ua"] = map_callback(function()
-      require("mini.surround").add("normal")
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Surround: Add"),
-  ["n|ud"] = map_callback(function()
-      require("mini.surround").delete()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Surround: Delete"),
-  ["n|ur"] = map_callback(function()
-      require("mini.surround").replace()
-    end)
-    :with_noremap()
-    :with_silent()
-    :with_desc("Surround: Replace"),
-
   -- Plugin: Suda
   ["n|<leader>qS"] = map_cmd("<CMD>Suda w<CR>"):with_noremap():with_silent():with_desc("Suda: Write"),
   ["n|<leader>qv"] = map_cmd("<CMD>Suda wq<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit"),
@@ -698,7 +678,6 @@ vim.defer_fn(function()
     { "<leader><tab>", desc = "Buffer: Switch back & forth", icon = "" },
     { "<leader>b[", desc = "Buffer: Previous", icon = "<-" },
     { "<leader>b]", desc = "Buffer: Next", icon = "->" },
-    { "<leader>cp", desc = "Color Picker", icon = "󰏘" },
     { "<leader>gb", desc = "Gitsigns: Toggle current line blame", icon = "" },
     { "<leader>gs", desc = "Gitsigns: Stage hunk", icon = "" },
     { "<leader>gu", desc = "Gitsigns: Undo stage hunk", icon = "" },
@@ -728,9 +707,6 @@ vim.defer_fn(function()
     { "<leader>xx", desc = "Trouble: document diagnostics", icon = "" },
     { "<leader>xt", desc = "Trouble: TODO", icon = "" },
     { "<leader>xc", desc = "Todo Comments: show TODO", icon = "" },
-    { "<leader>ua", desc = "Surround: Add", icon = "" },
-    { "<leader>ud", desc = "Surround: Delete", icon = "" },
-    { "<leader>ur", desc = "Surround: Replace", icon = "󰏫" },
     { "<leader>qz", desc = "Force quit", icon = "󰝥" },
     { "<leader>qf", desc = "Force quit all (no save)", icon = "" },
     { "<leader>qx", desc = "Save all and quit", icon = "" },
