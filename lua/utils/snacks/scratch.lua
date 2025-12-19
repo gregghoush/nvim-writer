@@ -98,7 +98,7 @@ function M.select_scratch()
   })
 end
 
-function M.new_scratch(filetypes)
+function M.new_scratch()
   Snacks.scratch({ ft = "plaintext", name = generate_uuid() })
   ---@diagnostic disable-next-line: missing-fields
   -- Snacks.picker.pick({

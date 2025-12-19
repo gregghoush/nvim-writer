@@ -112,6 +112,18 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Telescope Outline"),
+  ["n|<leader>mnn"] = map_callback(function()
+      require("utils.notes").new_note()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Create New Note"),
+  ["n|<leader>mno"] = map_callback(function()
+      require("utils.notes").select_note()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Create New Note"),
   ["n|<leader>mdh"] = map_cmd("<CMD>MDHeaders<CR>"):with_noremap():with_silent():with_desc("Markdown Headers"),
   ["n|<leader>mdc"] = map_cmd("<CMD>MDHeadersCurrent<CR>")
     :with_noremap()
@@ -658,6 +670,8 @@ vim.defer_fn(function()
 
   wk.add({
     mode = "n",
+    { "<leader>-", desc = "Scratch: New Scratchpad", icon = "" },
+    { "<leader>_", desc = "Scratch: Open Existing", icon = "" },
     { "<leader>lr", desc = "LSP: Show references", icon = "" },
     { "<leader>lk", desc = "LSP: Go to declaration", icon = "" },
     { "<leader>ld", desc = "LSP: Show definitions", icon = "" },
@@ -766,6 +780,8 @@ vim.defer_fn(function()
     { "<leader>mwc", desc = "Remove (cleanup) Bad Links", icon = "" },
     { "<leader>mwg", desc = "Wiki Grep", icon = "" },
     { "<leader>mwg", desc = "Wiki Grep", icon = "" },
+    { "<leader>mnn", desc = "Create Note", icon = "" },
+    { "<leader>mno", desc = "Open Existing Note", icon = "" },
   })
 
   -- Register folding keymaps with which-key
