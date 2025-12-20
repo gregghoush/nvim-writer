@@ -1,4 +1,7 @@
 local bind = require("utils.keymap-bind")
+local common = require("utils.common")
+local notes = require("utils.notes")
+local telescope_builtin = require("telescope.builtin")
 local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
@@ -112,14 +115,138 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Telescope Outline"),
+  ["n|<leader>mb1"] = map_cmd("<CMD>edit " .. common.get_book_1_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 1 Index"),
+  ["n|<leader>mb2"] = map_cmd("<CMD>edit " .. common.get_book_2_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 2 Index"),
+  ["n|<leader>mb3"] = map_cmd("<CMD>edit " .. common.get_book_3_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 3 Index"),
+  ["n|<leader>mb4"] = map_cmd("<CMD>edit " .. common.get_book_4_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 4 Index"),
+  ["n|<leader>mb5"] = map_cmd("<CMD>edit " .. common.get_book_5_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 5 Index"),
+  ["n|<leader>mb6"] = map_cmd("<CMD>edit " .. common.get_book_6_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 6 Index"),
+  ["n|<leader>mb7"] = map_cmd("<CMD>edit " .. common.get_book_7_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 7 Index"),
+  ["n|<leader>mb8"] = map_cmd("<CMD>edit " .. common.get_book_8_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 8 Index"),
+  ["n|<leader>mb9"] = map_cmd("<CMD>edit " .. common.get_book_9_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Book 9 Index"),
+  ["n|<leader>mli"] = map_cmd("<CMD>edit " .. common.get_lore_root() .. "/index.md <CR>")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Open Lore Index"),
+  ["n|<leader>mlf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Lore Files"),
+  ["n|<leader>mlg"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Lore Files"),
+  ["n|<leader>mlcf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_character_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Character Lore Files"),
+  ["n|<leader>mlcg"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_character_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Character Lore Files"),
+  ["n|<leader>mlaf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_ability_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Ability Lore Files"),
+  ["n|<leader>mlag"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_ability_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Ability Lore Files"),
+  ["n|<leader>mlsf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_spell_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Spell Lore Files"),
+  ["n|<leader>mlsg"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_spell_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Spell Lore Files"),
+  ["n|<leader>mllf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_location_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Location Lore Files"),
+  ["n|<leader>mllg"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_location_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Location Lore Files"),
+  ["n|<leader>mlof"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_organization_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Organization Lore Files"),
+  ["n|<leader>mlog"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_organization_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Organization Lore Files"),
+  ["n|<leader>mlrf"] = map_callback(function()
+      telescope_builtin.find_files({ cwd = common.get_lore_rule_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Find Rule Lore Files"),
+  ["n|<leader>mlrg"] = map_callback(function()
+      telescope_builtin.live_grep({ cwd = common.get_lore_rule_root() })
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Search Rule Lore Files"),
   ["n|<leader>mnn"] = map_callback(function()
-      require("utils.notes").new_note()
+      notes.new_note()
     end)
     :with_noremap()
     :with_silent()
     :with_desc("Create New Note"),
   ["n|<leader>mno"] = map_callback(function()
-      require("utils.notes").select_note()
+      notes.select_note()
     end)
     :with_noremap()
     :with_silent()
@@ -176,7 +303,7 @@ local plug_map = {
     :with_silent()
     :with_desc("Show Hover Box"),
   -- ["n|<leader>mi"] = map_cmd("<cmd><cr>"):with_noremap():with_silent():with_desc("GoTo Index"),
-  ["n|<leader>mlr"] = map_callback(function()
+  ["n|<leader>mR"] = map_callback(function()
       vim.lsp.buf.rename()
     end)
     :with_noremap()
@@ -735,6 +862,15 @@ vim.defer_fn(function()
     { "<leader>mto", desc = "Toggle Telescope Outline", icon = "" },
     { "<leader>mhi", desc = "Increase Heading #", icon = "" },
     { "<leader>mhd", desc = "Decrease Heading #", icon = "" },
+    { "<leader>mb1", desc = "Book 1 Index", icon = "" },
+    { "<leader>mb2", desc = "Book 2 Index", icon = "" },
+    { "<leader>mb3", desc = "Book 3 Index", icon = "" },
+    { "<leader>mb4", desc = "Book 4 Index", icon = "" },
+    { "<leader>mb5", desc = "Book 5 Index", icon = "" },
+    { "<leader>mb6", desc = "Book 6 Index", icon = "" },
+    { "<leader>mb7", desc = "Book 7 Index", icon = "" },
+    { "<leader>mb8", desc = "Book 8 Index", icon = "" },
+    { "<leader>mb9", desc = "Book 9 Index", icon = "" },
     { "<leader>mp", desc = "Toggle Preview", icon = "" },
     { "<leader>ms", desc = "Toggle Split View", icon = "" },
     { "<leader>mr", desc = "List References", icon = "" },
