@@ -6,12 +6,12 @@ set runtimepath=$VIMRUNTIME
 let &packpath = &runtimepath
 
 " Add the config directory to runtimepath
-let s:config_path = expand('~/.config/nvim')
+let s:config_path = expand('~/.config/nvim-writer')
 let &runtimepath = &runtimepath . ',' . s:config_path
 
 " Ensure we're using the correct directories in tests
-let s:test_dir = expand('~/.config/nvim/test')
-let s:tests_dir = expand('~/.config/nvim/tests')
+let s:test_dir = expand('~/.config/nvim-writer/test')
+let s:tests_dir = expand('~/.config/nvim-writer/tests')
 
 " Disable features not needed for testing
 let g:loaded_node_provider = 0

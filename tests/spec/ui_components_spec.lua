@@ -145,7 +145,7 @@ test.describe("UI Components", function()
 
     -- Use a more targeted approach to find explorer plugins
     -- First check edgy.lua since we know it contains snacks.explorer
-    local edgy_file = vim.fn.expand("~/.config/nvim/lua/plugins/edgy.lua")
+    local edgy_file = vim.fn.expand("~/.config/nvim-writer/lua/plugins/edgy.lua")
     if vim.fn.filereadable(edgy_file) == 1 then
       -- Look for the explorer plugins in the edgy file
       local file = io.open(edgy_file, "r")

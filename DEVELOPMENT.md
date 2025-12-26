@@ -1,6 +1,6 @@
-# Development Guide for Neovim Projects
+# Development Guide for nvim-writer
 
-This document outlines the development workflow, testing setup, and requirements for working with Neovim Lua projects such as this configuration, Laravel Helper plugin, and Claude Code plugin.
+This document outlines the development workflow, testing setup, and requirements for working on nvim-writer, a specialized Neovim configuration for writing novels.
 
 ## Requirements
 
@@ -140,7 +140,7 @@ luarocks install luacheck
 
 2. Install Git hooks:
    ```bash
-   cd ~/.config/nvim
+   cd ~/.config/nvim-writer
    ./scripts/setup-hooks.sh
    ```
 
@@ -268,13 +268,22 @@ All our Neovim projects follow a similar structure:
 ├── .github/            # GitHub-specific files and workflows
 ├── .githooks/          # Git hooks for pre-commit validation
 ├── lua/                # Main Lua source code
-│   └── [project-name]/ # Project-specific modules
-├── test/               # Basic test modules
+│   ├── config/       # Core configuration files
+│   ├── plugins/       # Plugin configurations
+│   │   ├── ai/    # AI-related plugins
+│   │   └── snacks/ # Snacks.nvim components
+│   └── utils/        # Utility functions
+│       ├── notes.lua   # Note management
+│       └── common.lua  # Common helpers
+├── test/               # Basic test modules (legacy)
 ├── tests/              # Extended test suites
+│   ├── spec/        # Test specifications
+│   └── minimal-init.lua # Minimal test environment
 ├── .luacheckrc         # LuaCheck configuration
 ├── .stylua.toml        # StyLua configuration
 ├── Makefile            # Common commands
 ├── CHANGELOG.md        # Project version history
+├── CLAUDE.md          # Configuration guidelines
 └── README.md           # Project overview
 ```
 

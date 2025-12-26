@@ -12,7 +12,7 @@ local nvim_config_path = vim.fn.fnamemodify(vim.fn.resolve("."), ":p")
 -- Ensure we're in the right directory by checking for tests dir
 if vim.fn.isdirectory(nvim_config_path .. "/tests") == 0 then
   -- Try using absolute path as fallback
-  nvim_config_path = vim.fn.expand("~/.config/nvim")
+  nvim_config_path = vim.fn.expand("~/.config/nvim-writer")
 end
 
 print("Using config path: " .. nvim_config_path)
@@ -137,6 +137,22 @@ local function setup_mocks()
       sources = function() end,
       formatting = function() end,
     },
+  }
+
+  -- Mock utils.common module for tests
+  package.loaded["utils.common"] = {
+    get_iwe_root = function()
+      return "/tmp/test_project"
+    end,
+    is_empty = function(s)
+      return s == nil or s == ""
+    end,
+    get_markdown_filename = function()
+      return "test_note.md"
+    end,
+    get_notes_root = function()
+      return "/tmp/test_project/notes"
+    end,
   }
 end
 

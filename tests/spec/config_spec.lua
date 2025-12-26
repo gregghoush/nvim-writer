@@ -38,7 +38,7 @@ test.describe("Configuration", function()
       print("Error loading keymaps: " .. tostring(result))
       -- Check if file exists but can't be loaded due to dependencies
       -- We'll consider this a pass for testing purposes in local environment
-      local file_path = vim.fn.expand("~/.config/nvim/lua/config/keymaps.lua")
+      local file_path = vim.fn.expand("~/.config/nvim-writer/lua/config/keymaps.lua")
       local file_exists = io.open(file_path, "r")
       if file_exists then
         print("File exists but couldn't be loaded in test environment")

@@ -10,7 +10,7 @@ test.describe("Plugin Management", function()
   -- Test if lazy.nvim is loaded correctly
   test.it("should check for lazy.nvim configuration", function()
     -- Try to load the lazy configuration module
-    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim")
+    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim-writer")
 
     -- First check if lazy.lua exists, otherwise config.lazy
     local lazy_file = io.open(config_path .. "/lua/config/lazy.lua", "r")
@@ -52,7 +52,7 @@ test.describe("Plugin Management", function()
     }
 
     -- Search for plugin specs in lua/plugins directory
-    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim")
+    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim-writer")
     local plugins_found = {}
 
     -- Find plugin files
@@ -88,6 +88,18 @@ test.describe("Plugin Management", function()
       end
     end
 
+    -- Special check: lazy.nvim is installed via config/lazy.lua, not plugin specs
+    -- Check if config/lazy.lua exists and contains lazy.nvim
+    local lazy_config_file = io.open(config_path .. "/lua/config/lazy.lua", "r")
+    if lazy_config_file then
+      local content = lazy_config_file:read("*all")
+      lazy_config_file:close()
+      if content:find("lazy.nvim") or content:find("folke/lazy.nvim") then
+        plugins_found["lazy.nvim"] = true
+        print("Found lazy.nvim installation in config/lazy.lua")
+      end
+    end
+
     -- Check if we found the essential plugins
     local missing_plugins = {}
     for _, plugin_name in ipairs(essential_plugins) do
@@ -115,7 +127,7 @@ test.describe("Plugin Management", function()
     end
 
     -- Check for plugin directory structure
-    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim")
+    local config_path = os.getenv("NVIM_CONFIG_PATH") or vim.fn.expand("~/.config/nvim-writer")
     local plugins_dir = config_path .. "/lua/plugins"
 
     -- Check if plugins directory exists
