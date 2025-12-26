@@ -437,6 +437,54 @@ Conditional AI features based on flags:
 - Disabled heavy built-in plugins
 - Smart module loading based on filetype
 
+## Recent Session Context
+
+### Session: Documentation Refactor & Test Infrastructure (2024-12-26)
+
+**Major Changes Made:**
+1. Fixed all failing tests (2 failures → 0 failures, 20/20 passing)
+2. Updated all documentation for nvim-writer project (writing-focused)
+3. Updated README generation function in keymaps.lua
+
+**Test Fixes Applied:**
+- Fixed keymap utility functions test to recognize `utils.keymap` module functions (amend, replace)
+- Updated essential plugins test to detect lazy.nvim in `config/lazy.lua` (not plugin specs)
+- Added mocks for `utils.common.get_iwe_root()` in `tests/minimal-init.lua` to prevent nil concatenation errors
+- Updated all test paths to use `nvim-writer` directory instead of old generic paths
+
+**Documentation Overhaul:**
+- CLAUDE.md: Complete rewrite for writing workflows (books, wiki, lore, notes)
+- DEVELOPMENT.md: Updated project structure and paths for nvim-writer
+- AGENTS.md: Updated project overview and version info
+- SUPPORT.md: Complete rewrite for nvim-writer project
+- ROADMAP.md: Writing-specific goals and features
+- README generation: Updated to generate writing-focused README.md
+
+**Key nvim-writer Features:**
+- Book Management: 9 book projects with dedicated keybindings (`<leader>mb1-9`)
+- Wiki System: NeoWiki for personal knowledge base (`<leader>mw...`)
+- Note Management: Create/open notes (`<leader>mn...`)
+- Lore Organization: Characters, spells, abilities, locations, rules, organizations
+- Project Structure: Uses `.iwe` file as project marker for writing projects
+- Key Workflows: Books, Wiki, Lore, Notes
+
+**Important Utilities:**
+- `utils.common.get_iwe_root()` - Finds project root with `.iwe` marker
+- `utils.notes` - Note and book management functions
+- `utils.neowiki` - Wiki system for knowledge organization
+- `utils.keymap` - Keybinding utilities (amend, replace functions)
+
+**When Running Tests:**
+- Tests use `tests/minimal-init.lua` for isolated environment
+- Mocks are required for external dependencies (utils.common, cmp, etc.)
+- All tests must pass before commits (pre-commit hook enforcement)
+- Run `make test` to verify changes
+
+**Generating README:**
+- Press `<leader>pr` in nvim-writer to regenerate README.md
+- README is dynamically generated from installed plugins
+- Content reflects current nvim-writer configuration
+
 ## Troubleshooting
 
 ### Common Issues
@@ -446,6 +494,7 @@ Conditional AI features based on flags:
 3. **LSP not starting**: Check filetype match, verify Mason installation
 4. **Tests failing**: Run with `make test-verbose` for details
 5. **Formatting issues**: Run `make format` before committing
+6. **utils.common nil errors**: Ensure `tests/minimal-init.lua` has proper mocks
 
 ### Getting Help
 
@@ -453,3 +502,5 @@ Conditional AI features based on flags:
 - Verify Neovim version (`nvim --version`)
 - Review test output with verbose mode
 - Check existing issues in GitHub repository
+- Review CLAUDE.md for writing workflow context
+- Review this AGENTS.md file for recent session context
