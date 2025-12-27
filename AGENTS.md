@@ -445,12 +445,43 @@ Conditional AI features based on flags:
 1. Fixed all failing tests (2 failures → 0 failures, 20/20 passing)
 2. Updated all documentation for nvim-writer project (writing-focused)
 3. Updated README generation function in keymaps.lua
+4. Expanded test suite from 20 to 30 tests (+10 tests, all passing)
+5. Identified missing external tool dependencies
 
 **Test Fixes Applied:**
 - Fixed keymap utility functions test to recognize `utils.keymap` module functions (amend, replace)
 - Updated essential plugins test to detect lazy.nvim in `config/lazy.lua` (not plugin specs)
 - Added mocks for `utils.common.get_iwe_root()` in `tests/minimal-init.lua` to prevent nil concatenation errors
 - Updated all test paths to use `nvim-writer` directory instead of old generic paths
+
+**New Test Files Added:**
+- `tests/spec/writing_spec.lua` - Tests writing-specific plugins (6 tests)
+- `tests/spec/utils_spec.lua` - Tests utility modules (5 tests)
+- `tests/spec/writing_plugins_spec.lua` - Tests critical plugin files (3 tests)
+
+**Test Coverage Summary:**
+| Test File | Tests | Description |
+|-----------|--------|-------------|
+| basic_spec.lua | 3 | Neovim version, test mode |
+| config_spec.lua | 5 | Config modules (options, keymaps, autocmd) |
+| keymappings_spec.lua | 3 | Leader key, keymap utils, which-key |
+| ui_components_spec.lua | 5 | Colorscheme, statusline, notifications, explorer |
+| utils_spec.lua | 5 (NEW) | Utility modules (common, notes, git, keymap) |
+| writing_spec.lua | 6 (NEW) | Writing plugins (iwe, neowiki, pencil, markdown) |
+| writing_plugins_spec.lua | 3 (NEW) | Critical plugin files validation |
+
+**Critical Writing Plugins Now Tested:**
+- iwe.lua - Book/notes management (CORE)
+- neowiki.lua - Wiki system (CORE)
+- pencil.lua - Prose editing (CORE)
+- markdown.lua - Markdown support (CORE)
+- auto-save.lua - Auto-save (CRITICAL for writing)
+- treesitter.lua - Syntax highlighting
+- telescope.lua - Fuzzy finding
+- lualine.lua - Status line
+- which-key.lua - Key binding help
+- formatter.lua - Prettier for Markdown
+- linter.lua - Proselint for Markdown
 
 **Documentation Overhaul:**
 - CLAUDE.md: Complete rewrite for writing workflows (books, wiki, lore, notes)
@@ -459,6 +490,41 @@ Conditional AI features based on flags:
 - SUPPORT.md: Complete rewrite for nvim-writer project
 - ROADMAP.md: Writing-specific goals and features
 - README generation: Updated to generate writing-focused README.md
+
+**External Tool Dependencies Identified:**
+
+### Required Tools (Must Install Manually):
+1. **Prettier** (Node.js)
+   ```bash
+   npm install -g prettier
+   ```
+   Purpose: Markdown formatter
+
+2. **Proselint** (Python)
+   ```bash
+   pip install proselint
+   ```
+   Purpose: Prose linter for Markdown
+
+### Optional LSP Servers (Install via Mason or manually):
+3. **ltex-ls-plus** (LanguageTool LSP)
+   ```bash
+   npm install -g @valentjn/ltex-ls
+   ```
+   Purpose: Language server for LaTeX/Markdown
+
+4. **Oxlint** (JavaScript/TypeScript LSP)
+   ```bash
+   npm install -g oxlint
+   ```
+   Purpose: JavaScript/TypeScript LSP server
+
+**Already Installed Tools:**
+- Neovim, Go, Python, Node.js ✅
+- lazygit, ripgrep, fd, fzf ✅
+- yazi (file explorer) ✅
+- iwe, iwes (writing tools) ✅
+- Mason (LSP manager) - available in Neovim ✅
 
 **Key nvim-writer Features:**
 - Book Management: 9 book projects with dedicated keybindings (`<leader>mb1-9`)
@@ -470,8 +536,11 @@ Conditional AI features based on flags:
 
 **Important Utilities:**
 - `utils.common.get_iwe_root()` - Finds project root with `.iwe` marker
+- `utils.common.get_lore_root()` - Finds lore directory
+- `utils.common.get_notes_root()` - Finds notes directory
 - `utils.notes` - Note and book management functions
 - `utils.neowiki` - Wiki system for knowledge organization
+- `utils.git.get_git_root()` - Git workspace utilities
 - `utils.keymap` - Keybinding utilities (amend, replace functions)
 
 **When Running Tests:**
@@ -479,11 +548,28 @@ Conditional AI features based on flags:
 - Mocks are required for external dependencies (utils.common, cmp, etc.)
 - All tests must pass before commits (pre-commit hook enforcement)
 - Run `make test` to verify changes
+- Run `make test-verbose` for detailed output
 
 **Generating README:**
 - Press `<leader>pr` in nvim-writer to regenerate README.md
 - README is dynamically generated from installed plugins
 - Content reflects current nvim-writer configuration
+
+**Recent Commits:**
+- `99f2cfe` - Refactor config as nvim-writer: writing-focused configuration
+- `d73d8b1` - docs: Add session context to AGENTS.md
+- `a5a2013` - test: Add writing-specific tests and expand test coverage
+
+**Installation Status:**
+- Neovim 0.10+ ✅
+- Plugin dependencies (Go, Python, Node.js) ✅
+- Rust tools (iwe, iwes) ✅
+- Git tools (lazygit) ✅
+- Search tools (ripgrep, fd, fzf) ✅
+- File explorer (yazi) ✅
+- PENDING: prettier (npm)
+- PENDING: proselint (pip)
+- Review this AGENTS.md file for recent session context
 
 ## Troubleshooting
 
