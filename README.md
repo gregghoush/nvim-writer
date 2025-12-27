@@ -4,203 +4,167 @@
 
 <div align="center">
 
-[![GitHub License](https://img.shields.io/github/license/greggh/nvim?style=flat-square)](https://github.com/greggh/nvim/blob/main/LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/greggh/nvim?style=flat-square)](https://github.com/greggh/nvim/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/greggh/nvim?style=flat-square)](https://github.com/greggh/nvim/issues)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/greggh/nvim?style=flat-square)](https://github.com/greggh/nvim/commits/main)
-[![Neovim Version](https://img.shields.io/badge/Neovim-0.10%2B-blueviolet?style=flat-square&logo=neovim)](https://github.com/neovim/neovim/releases/tag/v0.10.0)
-[![Version](https://img.shields.io/badge/Version-0.4.2-blue?style=flat-square)](https://github.com/greggh/nvim/releases/tag/v0.4.2)
-[![MIT License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](https://github.com/greggh/nvim/blob/main/LICENSE)
-[![Dotfyle](https://dotfyle.com/greggh/nvim/badges/plugins?style=flat-square)](https://dotfyle.com/greggh/nvim)
-[![Dotfyle](https://dotfyle.com/greggh/nvim/badges/leaderkey?style=flat-square)](https://dotfyle.com/greggh/nvim)
-[![Dotfyle](https://dotfyle.com/greggh/nvim/badges/plugin-manager?style=flat-square)](https://dotfyle.com/greggh/nvim)
+_A modern Neovim configuration focused on writing and Markdown workflows_
 
-![Neovim Screenshot](assets/readme/neovim.png)
+<p>
+This configuration is optimized for writing novels and managing large Markdown projects.
+</p>
 
-_A modern, feature-rich Neovim configuration with a focus on productivity and developer experience_
-
-[Features](#features) •
-[Requirements](#requirements) •
-[Installation](#installation) •
-[Key Bindings](#key-bindings) •
-[Screenshots](#screenshots) •
-[Plugins](#plugins) •
-[Contributing](#contributing) •
-[License](#license) •
-[Discussions](https://github.com/greggh/nvim/discussions)
-
+[![License](https://img.shields.io/github/license/greggh/nvim-writer?style=flat-square)](https://github.com/greggh/nvim-writer/blob/main/LICENSE)
 </div>
 
-## Table of Contents
+## ⚡ Features
 
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Key Bindings](#key-bindings)
-- [Screenshots](#screenshots)
-- [Plugins](#plugins)
-- [Contributing](#contributing)
-- [Development](#development)
-- [License](#license)
-- [Community](#community)
-- [Acknowledgements](#acknowledgements)
+- **Markdown-focused**: Optimized for writing novels in Markdown format
+- **Wiki System**: Personal wiki via NeoWiki for organizing knowledge
+- **Prose Editing**: Pencil plugin for distraction-free writing
+- **Book Management**: Dedicated keybindings for managing multiple book projects
+- **Git Integration**: LazyGit for version control of your writing
+- **Modern UI**: Catppuccin theme with clean, distraction-free interface
+- **AI Assistance**: Copilot integration for writing assistance
+- **LSP Support**: Language server support for Markdown and other formats
+- **Telescope Integration**: Fuzzy finding for files and notes
 
-## Features
+## 📚 Key Writing Features
 
-- Modern and elegant UI with Catppuccin theme
-- Powerful LSP integration for dozens of languages
-- Treesitter-based syntax highlighting and text objects
-- Fuzzy finding with Telescope and FZF
-- Git integration with Gitsigns and Diffview
-- Extensive debugging support via DAP
-- Testing frameworks for multiple languages
-- AI integration with Claude Code and Copilot
-- Integrated terminal experience
-- Comprehensive plugin ecosystem
-- Advanced autocompletion
-- Fast startup and responsive editing experience
+- **Book Navigation**: Quick access to 9 book projects (`<leader>mb1-9`)
+- **Wiki System**: Create, link, and navigate wiki pages (`<leader>mw...`)
+- **Note Management**: Create and open notes (`<leader>mn...`)
+- **Markdown Editing**: Heading manipulation, preview, and outline (`<leader>mo...`, `<leader>mh...`)
+- **Lore Management**: Organize characters, spells, abilities, and locations
+- **Project Structure**: Supports `.iwe` project marker for writing projects
 
 ## Requirements
 
-- **[Neovim 0.10+](https://github.com/neovim/neovim/releases)** - Required for `vim.system()`, `splitkeep`, and modern LSP features
-- **[Nerd Font](https://www.nerdfonts.com/)** - Required for icons
-- External dependencies:
-  - [lazygit](https://github.com/jesseduffield/lazygit) - Git TUI
-  - [ripgrep](https://github.com/BurntSushi/ripgrep) - Fast grep
-  - [fd](https://github.com/sharkdp/fd) - Fast find
-  - [fzf](https://github.com/junegunn/fzf) - Fuzzy finder
+- [Nerd Font](https://www.nerdfonts.com/)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [fd](https://github.com/sharkdp/fd)
+- [fzf](https://github.com/junegunn/fzf)
 
 ## Installation
 
-> ⚠️ **WARNING**: Always review the code before installing a configuration.
+> **REQUIRES NEOVIM 0.10+**. This configuration uses Neovim 0.10+ exclusive features including:
+> - `vim.system()` for async operations
+> - `splitkeep` option for better window management
+> - Updated LSP handlers and APIs
+> - Modern UI capabilities
+>
+> Always review code before installing a configuration.
 
-Clone the repository and install the plugins:
+Clone repository:
 
 ```sh
-git clone git@github.com:greggh/nvim ~/.config/greggh/nvim
+git clone git@github.com:greggh/nvim-writer ~/.config/nvim-writer
 ```
 
 Open Neovim with this config:
 
 ```sh
-NVIM_APPNAME=greggh/nvim/ nvim
+NVIM_APPNAME=nvim-writer nvim
 ```
 
-Or set it as your default by copying to the standard location:
+## Writing Workflow
 
-```sh
-git clone git@github.com:greggh/nvim ~/.config/nvim
-```
+This configuration is designed for novel writing with these key concepts:
+
+- **Books**: Each novel has its own directory with chapters organized as Markdown files
+- **Wiki**: Personal knowledge base linked to your writing projects
+- **Lore**: Organize story elements (characters, spells, abilities, locations, etc.)
+- **Notes**: Quick notes related to any aspect of your writing
 
 ## Key Bindings
 
 > 💡 Press `<Space>` to see available key bindings via which-key
 
-| Category       | Key Binding             | Description                        |
-| -------------- | ----------------------- | ---------------------------------- |
-| **General**    | `<C-s>` or `<leader>qs` | Save file                          |
-|                | `<C-q>` or `<leader>qq` | Quit                               |
-|                | `<leader>qz`            | Force quit                         |
-| **Navigation** | `<leader>e`             | File explorer                      |
-|                | `<leader>ff`            | Find files                         |
-|                | `<leader>fg`            | Live grep                          |
-| **Git**        | `<leader>gg`            | LazyGit                            |
-|                | `<leader>gl`            | View git log                       |
-|                | `<leader>gb`            | View git blame                     |
-| **LSP**        | `<leader>lo`            | Toggle LSP outline                 |
-|                | `<leader>xw`            | Find in workspace                  |
-|                | `<leader>ca`            | Code actions                       |
-| **Testing**    | `<leader>tr`            | Run nearest test                   |
-|                | `<leader>tt`            | Run file tests                     |
-| **AI**         | `<leader>ac`            | Toggle Claude Code (normal mode)   |
-|                | `<C-o>`                 | Toggle Claude Code (terminal mode) |
-| **Folding**    | `<leader>z0`            | Toggle level 0                     |
-|                | `<leader>z1`            | Toggle level 1                     |
-|                | `<leader>z2`            | Toggle level 2                     |
-| **Windows**    | `<leader>wm`            | Toggle maximize window             |
-| **Buffers**    | `<leader>bw`            | Close buffer safely                |
-|                | `<leader>bo`            | Close other buffers                |
-| **Treesitter** | `af/if`                 | Function text object               |
-|                | `ac/ic`                 | Class text object                  |
-|                | `aa/ia`                 | Parameter text object              |
-|                | `[f/]f`                 | Navigate between functions         |
-|                | `[c/]c`                 | Navigate between classes           |
-|                | `[a/]a`                 | Navigate between parameters        |
+| Category | Key Binding | Description |
+|----------|-------------|-------------|
+| Book 1-9 | `<leader>mb1-9` | Open book index |
+| Wiki Find | `<leader>mwf` | Search wiki files |
+| Wiki New | `<leader>mnn` | Create new wiki page |
+| Note New | `<leader>mnn` | Create new note |
+| Note Open | `<leader>mno` | Open existing note |
+| Outline | `<leader>mo` | Toggle sidebar outline |
+| Preview | `<leader>mp` | Toggle markdown preview |
+| LazyGit | `<leader>gg` | Open git interface |
+| Save | `<C-s>` | Save file |
 
-For a complete list of keybindings, press `<Space>` to see the which-key popup menu.
+## Contributing
 
-## Screenshots
+Contributions are welcome! If you'd like to help improve this configuration:
 
-![Editor with Telescope](assets/readme/neovim.png)
+1. Check [open issues](https://github.com/greggh/nvim-writer/issues) or create a new one to discuss your idea
+2. Fork repository
+3. Create a new branch for your feature
+4. Make your changes
+5. Run tests (`make test`) and ensure they pass
+6. Submit a pull request
 
-_Main editor with Telescope file finder_
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines and [DEVELOPMENT.md](DEVELOPMENT.md) for development setup.
 
-![Code with LSP](assets/readme/code-with-lsp.png)
+## Development
 
-_Code editing with LSP diagnostics_
+This configuration includes a testing framework and development tools:
 
-![Terminal Integration](assets/readme/terminal.png)
+- **Testing**: Run `make test` to execute all tests
+- **Linting**: Run `make lint` to check code quality
+- **Formatting**: Run `make format` to format Lua code
+- **Git Hooks**: Run `./scripts/setup-hooks.sh` to set up pre-commit hooks
 
-_Integrated terminal experience_
+For a complete development environment setup, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
-## Plugins
+## 💤 Plugin manager
 
-This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its plugin manager and includes many powerful plugins:
+- [lazy.nvim](https://github.com/folke/lazy.nvim)
 
-<details>
-<summary>Click to expand plugin list</summary>
+## 🔌 Plugins
 
 - [actions-preview.nvim](https://github.com/aznhe21/actions-preview.nvim)
 - [auto-save.nvim](https://github.com/okuuva/auto-save.nvim)
-- [avante.nvim](https://github.com/yetone/avante.nvim)
+- [blink-cmp-dictionary](https://github.com/Kaiser-Yang/blink-cmp-dictionary)
+- [blink-cmp-words](https://github.com/archie-judd/blink-cmp-words)
 - [blink-ripgrep.nvim](https://github.com/mikavilpas/blink-ripgrep.nvim)
 - [blink.cmp](https://github.com/saghen/blink.cmp)
 - [blink.compat](https://github.com/saghen/blink.compat)
 - [boole.nvim](https://github.com/nat-418/boole.nvim)
-- [catppuccin](https://github.com/catppuccin/nvim)
-- [ccc](https://github.com/uga-rosa/ccc.nvim)
-- [claude-code.nvim](https://github.com/greggh/claude-code.nvim)
 - [cmp-cmdline-history](https://github.com/dmitmel/cmp-cmdline-history)
-- [Comment.nvim](https://github.com/numToStr/Comment.nvim)
 - [conform.nvim](https://github.com/stevearc/conform.nvim)
-- [copilot.lua](https://github.com/zbirenbaum/copilot.lua)
-- [depsync.nvim](https://github.com/robertazzopardi/depsync.nvim)
 - [diffview.nvim](https://github.com/sindrets/diffview.nvim)
-- [dressing.nvim](https://github.com/stevearc/dressing.nvim)
 - [edgy.nvim](https://github.com/folke/edgy.nvim)
+- [emoji.nvim](https://github.com/allaman/emoji.nvim)
 - [flash.nvim](https://github.com/folke/flash.nvim)
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim)
 - [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim)
 - [helpview.nvim](https://github.com/OXY2DEV/helpview.nvim)
 - [highlight-undo.nvim](https://github.com/tzachar/highlight-undo.nvim)
-- [img-clip.nvim](https://github.com/HakonHarnes/img-clip.nvim)
 - [incline.nvim](https://github.com/b0o/incline.nvim)
-- [iron.nvim](https://github.com/Vigemus/iron.nvim)
-- [laravel-helper.nvim](https://github.com/greggh/laravel-helper.nvim)
+- [iwe.nvim](https://github.com/iwe-org/iwe.nvim)
 - [lazy.nvim](https://github.com/folke/lazy.nvim)
-- [lazydev.nvim](https://github.com/folke/lazydev.nvim)
+- [ltex_extra.nvim](https://github.com/barreiroleo/ltex_extra.nvim)
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)
 - [markview.nvim](https://github.com/OXY2DEV/markview.nvim)
 - [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)
 - [mason-tool-installer.nvim](https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim)
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
+- [md-headers.nvim](https://github.com/AntonVanAssche/md-headers.nvim)
+- [md-list.nvim](https://github.com/oliver-hughes/md-list.nvim)
 - [mini.icons](https://github.com/echasnovski/mini.icons)
 - [mini.sessions](https://github.com/echasnovski/mini.sessions)
+- [monokai-pro](https://github.com/loctvl842/monokai-pro.nvim)
+- [neowiki.nvim](https://github.com/echaya/neowiki.nvim)
 - [noice.nvim](https://github.com/folke/noice.nvim)
 - [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
 - [nvim-autopairs](https://github.com/windwp/nvim-autopairs)
 - [nvim-lightbulb](https://github.com/kosayoda/nvim-lightbulb)
 - [nvim-lint](https://github.com/mfussenegger/nvim-lint)
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
-- [nvim-nio](https://github.com/nvim-neotest/nvim-nio)
 - [nvim-notify](https://github.com/rcarriga/nvim-notify)
 - [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
 - [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - [nvim-ts-autotag](https://github.com/windwp/nvim-ts-autotag)
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
-- [one-small-step-for-vimkind](https://github.com/jbyuki/one-small-step-for-vimkind)
 - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
 - [quicker.nvim](https://github.com/stevearc/quicker.nvim)
 - [rainbow-delimiters.nvim](https://github.com/HiPhish/rainbow-delimiters.nvim)
@@ -209,74 +173,15 @@ This configuration uses [lazy.nvim](https://github.com/folke/lazy.nvim) as its p
 - [snacks.nvim](https://github.com/folke/snacks.nvim)
 - [suda](https://github.com/lambdalisue/suda.vim)
 - [symbol-usage.nvim](https://github.com/Wansmer/symbol-usage.nvim)
+- [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)
+- [telescope-ui-select.nvim](https://github.com/nvim-telescope/telescope-ui-select.nvim)
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
 - [tide.nvim](https://github.com/jackMort/tide.nvim)
 - [tiny-inline-diagnostic.nvim](https://github.com/rachartier/tiny-inline-diagnostic.nvim)
 - [todo-comments.nvim](https://github.com/folke/todo-comments.nvim)
-- [treewalker.nvim](https://github.com/aaronik/treewalker.nvim)
 - [trouble.nvim](https://github.com/folke/trouble.nvim)
+- [vim-pencil](https://github.com/preservim/vim-pencil)
 - [which-key.nvim](https://github.com/folke/which-key.nvim)
 - [workspace-diagnostics.nvim](https://github.com/artemave/workspace-diagnostics.nvim)
 - [yazi.nvim](https://github.com/mikavilpas/yazi.nvim)
-
-</details>
-
-## Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute.
-
-To get started:
-
-1. Check the [open issues](https://github.com/greggh/nvim/issues) or create a new one
-2. Fork the repository
-3. Create a new branch for your feature
-4. Make your changes
-5. Run the tests (`make test`) and ensure they pass
-6. Submit a pull request
-
-## Development
-
-This configuration includes a comprehensive testing framework and development tools:
-
-- **Testing**: Run `make test` to execute all tests
-- **Linting**: Run `make lint` to check code quality
-- **Formatting**: Run `make format` to format Lua code
-- **Git Hooks**: Run `./scripts/setup-hooks.sh` to set up pre-commit hooks
-- **Automation**:
-  - Automated releases via the GitHub Actions workflow
-  - Weekly dependency updates check via GitHub Actions
-  - Comprehensive CI pipeline for testing all changes
-
-For a complete development environment setup, see [DEVELOPMENT.md](DEVELOPMENT.md).
-
-## License
-
-[MIT License](LICENSE)
-
-## Community
-
-- [GitHub Discussions](https://github.com/greggh/nvim/discussions) - Get help, share ideas, and connect with other users
-- [GitHub Issues](https://github.com/greggh/nvim/issues) - Report bugs or suggest features
-- [GitHub Pull Requests](https://github.com/greggh/nvim/pulls) - Contribute to the project
-
-## Acknowledgements
-
-- [Neovim](https://neovim.io/) - The core editor this configuration enhances
-- [lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager that simplifies dependency management
-- [which-key.nvim](https://github.com/folke/which-key.nvim) - Keybinding discovery tool
-- [Treesitter](https://tree-sitter.github.io/tree-sitter/) - Parsing system for syntax highlighting and code navigation
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) - LSP configuration framework
-- [Catppuccin](https://github.com/catppuccin/nvim) - The beautiful color scheme used in screenshots
-- [Nerd Fonts](https://www.nerdfonts.com/) - Iconic fonts used throughout the UI
-- [Semantic Versioning](https://semver.org/) - Versioning standard used in this project
-- [Contributor Covenant](https://www.contributor-covenant.org/) - Code of Conduct standard
-- [Keep a Changelog](https://keepachangelog.com/) - Changelog format
-- [LuaCATS](https://luals.github.io/wiki/annotations/) - Type annotations for better IDE support
-- [StyLua](https://github.com/JohnnyMorganz/StyLua) - Lua code formatter
-- [Luacheck](https://github.com/lunarmodules/luacheck) - Lua static analyzer and linter
-- [Dotfyle](https://dotfyle.com) - Neovim config discovery platform
-
----
-
-<div align="center">
-  <p>Made with ❤️ by <a href="https://github.com/greggh">Gregg Housh</a></p>
-</div>
+- [zen-mode.nvim](https://github.com/folke/zen-mode.nvim)
