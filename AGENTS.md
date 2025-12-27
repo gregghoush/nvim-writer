@@ -567,10 +567,9 @@ Conditional AI features based on flags:
 - Git tools (lazygit) ✅
 - Search tools (ripgrep, fd, fzf) ✅
 - File explorer (yazi) ✅
-- PENDING: prettier (npm)
-- PENDING: proselint (pip)
+- Markdown formatter (prettier) ✅
+- Prose linter (proselint) ✅
 - Review this AGENTS.md file for recent session context
-
 ## Troubleshooting
 
 ### Common Issues
