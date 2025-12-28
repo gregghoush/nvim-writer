@@ -6,6 +6,7 @@ return {
   config = function()
     require("monokai-pro").setup({
       filter = "pro", -- classic | octagon | pro | machine | ristretto | spectrum
+      devicons = true, -- highlight the icons of `nvim-web-devicons`
       -- Enable this will disable filter option
       day_night = {
         enable = false, -- turn off by default

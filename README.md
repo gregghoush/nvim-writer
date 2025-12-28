@@ -11,6 +11,7 @@ This configuration is optimized for writing novels and managing large Markdown p
 </p>
 
 [![License](https://img.shields.io/github/license/greggh/nvim-writer?style=flat-square)](https://github.com/greggh/nvim-writer/blob/main/LICENSE)
+
 </div>
 
 ## ⚡ Features
@@ -45,6 +46,7 @@ This configuration is optimized for writing novels and managing large Markdown p
 ## Installation
 
 > **REQUIRES NEOVIM 0.10+**. This configuration uses Neovim 0.10+ exclusive features including:
+>
 > - `vim.system()` for async operations
 > - `splitkeep` option for better window management
 > - Updated LSP handlers and APIs
@@ -77,17 +79,17 @@ This configuration is designed for novel writing with these key concepts:
 
 > 💡 Press `<Space>` to see available key bindings via which-key
 
-| Category | Key Binding | Description |
-|----------|-------------|-------------|
-| Book 1-9 | `<leader>mb1-9` | Open book index |
-| Wiki Find | `<leader>mwf` | Search wiki files |
-| Wiki New | `<leader>mnn` | Create new wiki page |
-| Note New | `<leader>mnn` | Create new note |
-| Note Open | `<leader>mno` | Open existing note |
-| Outline | `<leader>mo` | Toggle sidebar outline |
-| Preview | `<leader>mp` | Toggle markdown preview |
-| LazyGit | `<leader>gg` | Open git interface |
-| Save | `<C-s>` | Save file |
+| Category  | Key Binding     | Description             |
+| --------- | --------------- | ----------------------- |
+| Book 1-9  | `<leader>mb1-9` | Open book index         |
+| Wiki Find | `<leader>mwf`   | Search wiki files       |
+| Wiki New  | `<leader>mnn`   | Create new wiki page    |
+| Note New  | `<leader>mnn`   | Create new note         |
+| Note Open | `<leader>mno`   | Open existing note      |
+| Outline   | `<leader>mo`    | Toggle sidebar outline  |
+| Preview   | `<leader>mp`    | Toggle markdown preview |
+| LazyGit   | `<leader>gg`    | Open git interface      |
+| Save      | `<C-s>`         | Save file               |
 
 ## Contributing
 
@@ -149,7 +151,6 @@ For a complete development environment setup, see [DEVELOPMENT.md](DEVELOPMENT.m
 - [mason.nvim](https://github.com/williamboman/mason.nvim)
 - [md-headers.nvim](https://github.com/AntonVanAssche/md-headers.nvim)
 - [md-list.nvim](https://github.com/oliver-hughes/md-list.nvim)
-- [mini.icons](https://github.com/echasnovski/mini.icons)
 - [mini.sessions](https://github.com/echasnovski/mini.sessions)
 - [monokai-pro](https://github.com/loctvl842/monokai-pro.nvim)
 - [neowiki.nvim](https://github.com/echaya/neowiki.nvim)
