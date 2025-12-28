@@ -69,6 +69,7 @@ return {
         -- Defer toggle mapping setup to improve startup time
         vim.defer_fn(function()
           -- Create a batch of toggle registrations for better performance
+          local Snacks = require("snacks")
           local toggles = {
             { option = "spell", opts = { name = "Spelling" }, key = "<leader>os" },
             { option = "wrap", opts = { name = "Wrap" }, key = "<leader>ow" },
@@ -92,7 +93,6 @@ return {
           }
 
           -- Register toggles in batches with small pauses to avoid UI freezes
-          local Snacks = require("snacks")
           for i, toggle in ipairs(toggles) do
             if toggle.option then
               Snacks.toggle.option(toggle.option, toggle.opts):map(toggle.key)

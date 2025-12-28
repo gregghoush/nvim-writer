@@ -7,13 +7,6 @@ return {
     "rcarriga/nvim-notify",
     "MunifTanjim/nui.nvim",
   },
-  keys = {
-    {
-      "<leader>nm",
-      "<CMD>messages<CR>",
-      desc = "Show messages",
-    },
-  },
   config = function()
     -- More minimal configuration that should definitely work
     require("noice").setup({

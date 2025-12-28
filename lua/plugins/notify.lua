@@ -1,16 +1,6 @@
 return {
   "rcarriga/nvim-notify",
   event = "VeryLazy",
-  keys = {
-    {
-      "<leader>nd",
-      function()
-        ---@diagnostic disable-next-line: missing-parameter
-        require("notify").dismiss()
-      end,
-      desc = "Dismiss notifications",
-    },
-  },
   opts = {
     -- Animation style
     stages = "fade",

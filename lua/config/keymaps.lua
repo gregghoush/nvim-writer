@@ -19,16 +19,10 @@ local function get_snacks()
   return Snacks
 end
 
-local definition_in_split = function()
-  vim.api.nvim_command("vsp")
-  lsp.buf.definition()
-  vim.api.nvim_command("normal zz")
-end
-
 local builtin_map = {
 
   -- fix stupid typo
-  ["n|q:"] = map_cmd("<Cmd>q<CR>"):with_noremap():with_silent():with_desc("edit: Quit"),
+  ["n|q:"] = map_cr("q"):with_noremap():with_silent():with_desc("edit: Quit"),
 
   -- Paste replace visual selection without yanking: https://vim.fandom.com/wiki/Pasting_over_visual_selection
   ["v|p"] = map_cmd('"_dP'):with_noremap():with_silent():with_desc("edit: Paste replace visual selection"),
@@ -80,10 +74,10 @@ local builtin_map = {
   ["n|<S-Tab>"] = map_cr("normal za"):with_noremap():with_silent():with_desc("edit: Toggle code fold"),
 
   -- Builtin: terminal
-  ["t|<C-w>h"] = map_cmd("<Cmd>wincmd h<CR>"):with_silent():with_noremap():with_desc("window: Focus left"),
-  ["t|<C-w>l"] = map_cmd("<Cmd>wincmd l<CR>"):with_silent():with_noremap():with_desc("window: Focus right"),
-  ["t|<C-w>j"] = map_cmd("<Cmd>wincmd j<CR>"):with_silent():with_noremap():with_desc("window: Focus down"),
-  ["t|<C-w>k"] = map_cmd("<Cmd>wincmd k<CR>"):with_silent():with_noremap():with_desc("window: Focus up"),
+  ["t|<C-w>h"] = map_cr("wincmd h"):with_silent():with_noremap():with_desc("window: Focus left"),
+  ["t|<C-w>l"] = map_cr("wincmd l"):with_silent():with_noremap():with_desc("window: Focus right"),
+  ["t|<C-w>j"] = map_cr("wincmd j"):with_silent():with_noremap():with_desc("window: Focus down"),
+  ["t|<C-w>k"] = map_cr("wincmd k"):with_silent():with_noremap():with_desc("window: Focus up"),
 
   -- Builtin: tab
   ["n|<leader>wtn"] = map_cr("tabnew"):with_noremap():with_silent():with_desc("tab: Create a new tab"),
@@ -107,11 +101,11 @@ end, 10)
 
 local plug_map = {
   -- Markdown Specific
-  ["n|<leader>mo"] = map_cmd("<cmd>Trouble symbols toggle win.position=right<cr>")
+  ["n|<leader>mo"] = map_cr("Trouble symbols toggle win.position=right")
     :with_noremap()
     :with_silent()
     :with_desc("Sidebar Outline"),
-  ["n|<leader>mto"] = map_cmd("<CMD>IWE telescope headers<CR>")
+  ["n|<leader>mto"] = map_cr("IWE telescope headers")
     :with_noremap()
     :with_silent()
     :with_desc("Telescope Outline"),
@@ -251,30 +245,30 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Create New Note"),
-  ["n|<leader>mdh"] = map_cmd("<CMD>MDHeaders<CR>"):with_noremap():with_silent():with_desc("Markdown Headers"),
-  ["n|<leader>mdc"] = map_cmd("<CMD>MDHeadersCurrent<CR>")
+  ["n|<leader>mdh"] = map_cr("MDHeaders"):with_noremap():with_silent():with_desc("Markdown Headers"),
+  ["n|<leader>mdc"] = map_cr("MDHeadersCurrent")
     :with_noremap()
     :with_silent()
     :with_desc("Markdown Current Headers"),
-  ["n|<leader>mdq"] = map_cmd("<CMD>MDHeadersQuickfix<CR>")
+  ["n|<leader>mdq"] = map_cr("MDHeadersQuickfix")
     :with_noremap()
     :with_silent()
     :with_desc("Markdown QuickFix Headers"),
-  ["n|<leader>mdt"] = map_cmd("<CMD>MDHeadersTelescope<CR>")
+  ["n|<leader>mdt"] = map_cr("MDHeadersTelescope")
     :with_noremap()
     :with_silent()
     :with_desc("Markdown Telescope Headers"),
-  ["n|<F2>"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
-  ["n|<leader>mp"] = map_cmd("<cmd>Markview Toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Preview"),
-  ["n|<F3>"] = map_cmd("<cmd>Markview splitToggle<cr>"):with_noremap():with_silent():with_desc("Toggle Split View"),
-  ["n|<leader>ms"] = map_cmd("<cmd>Markview splitToggle<cr>")
+  ["n|<F2>"] = map_cr("Markview Toggle"):with_noremap():with_silent():with_desc("Toggle Preview"),
+  ["n|<leader>mp"] = map_cr("Markview Toggle"):with_noremap():with_silent():with_desc("Toggle Preview"),
+  ["n|<F3>"] = map_cr("Markview splitToggle"):with_noremap():with_silent():with_desc("Toggle Split View"),
+  ["n|<leader>ms"] = map_cr("Markview splitToggle")
     :with_noremap()
     :with_silent()
     :with_desc("Toggle Split View"),
-  ["n|<F5>"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
-  ["n|<F6>"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
-  ["n|<leader>mhi"] = map_cmd("<CMD>Heading increase<CR>"):with_noremap():with_silent():with_desc("Increase Heading #"),
-  ["n|<leader>mhd"] = map_cmd("<CMD>Heading decrease<CR>"):with_noremap():with_silent():with_desc("Decrease Heading #"),
+  ["n|<F5>"] = map_cr("Heading increase"):with_noremap():with_silent():with_desc("Increase Heading #"),
+  ["n|<F6>"] = map_cr("Heading decrease"):with_noremap():with_silent():with_desc("Decrease Heading #"),
+  ["n|<leader>mhi"] = map_cr("Heading increase"):with_noremap():with_silent():with_desc("Increase Heading #"),
+  ["n|<leader>mhd"] = map_cr("Heading decrease"):with_noremap():with_silent():with_desc("Decrease Heading #"),
   ["n|<CR>"] = map_callback(function()
       vim.lsp.buf.definition()
     end)
@@ -289,13 +283,13 @@ local plug_map = {
   --   :with_desc("GoTo Definition/Link in Split"),
   -- ["n|<Tab>"] = map_cmd("<Plug>(iwe-link-next)"):with_noremap():with_silent():with_desc("Next Link"),
   -- ["n|<S-Tab>"] = map_cmd("<Plug>(iwe-link-prev)"):with_noremap():with_silent():with_desc("Previous Link"),
-  ["n|<leader>mr"] = map_cmd("<cmd>IWE telescope backlinks<cr>")
+  ["n|<leader>mr"] = map_cr("IWE telescope backlinks")
     :with_noremap()
     :with_silent()
     :with_desc("List References"),
   -- ["n|<leader>mc"] = map_cmd("<cmd>Checkbox toggle<cr>"):with_noremap():with_silent():with_desc("Toggle Checkbox"),
-  ["n|<leader>mec"] = map_cmd("<cmd>Editor create<cr>"):with_noremap():with_silent():with_desc("Codebox: Create"),
-  ["n|<leader>mee"] = map_cmd("<cmd>Editor edit<cr>"):with_noremap():with_silent():with_desc("Codebox: Edit"),
+  ["n|<leader>mec"] = map_cr("Editor create"):with_noremap():with_silent():with_desc("Codebox: Create"),
+  ["n|<leader>mee"] = map_cr("Editor edit"):with_noremap():with_silent():with_desc("Codebox: Edit"),
   ["n|<leader>mk"] = map_callback(function()
       vim.lsp.buf.hover()
     end)
@@ -309,22 +303,22 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Rename link/file"),
-  ["n|<leader>mwf"] = map_cmd("<cmd>IWE telescope find_files<cr>")
+  ["n|<leader>mwf"] = map_cr("IWE telescope find_files")
     :with_noremap()
     :with_silent()
     :with_desc("Wiki Find Files"),
-  ["n|<leader>mwp"] = map_cmd("<cmd>IWE telescope paths<cr>"):with_noremap():with_silent():with_desc("Wiki Paths"),
-  ["n|<leader>mwr"] = map_cmd("<cmd>IWE telescope roots<cr>"):with_noremap():with_silent():with_desc("Wiki Roots"),
-  ["n|<leader>mwg"] = map_cmd("<cmd>IWE telescope grep<cr>"):with_noremap():with_silent():with_desc("Wiki Grep"),
-  ["n|<leader>mwi"] = map_cmd("<cmd>lua require('neowiki').open_wiki()<cr>")
+  ["n|<leader>mwp"] = map_cr("IWE telescope paths"):with_noremap():with_silent():with_desc("Wiki Paths"),
+  ["n|<leader>mwr"] = map_cr("IWE telescope roots"):with_noremap():with_silent():with_desc("Wiki Roots"),
+  ["n|<leader>mwg"] = map_cr("IWE telescope grep"):with_noremap():with_silent():with_desc("Wiki Grep"),
+  ["n|<leader>mwi"] = map_cr("lua require('neowiki').open_wiki()")
     :with_noremap()
     :with_silent()
     :with_desc("Open Wiki"),
-  ["n|<leader>mww"] = map_cmd("<cmd>lua require('neowiki').open_wiki_floating()<cr>")
+  ["n|<leader>mww"] = map_cr("lua require('neowiki').open_wiki_floating()")
     :with_noremap()
     :with_silent()
     :with_desc("Open Wiki in Floating Window"),
-  ["n|<leader>mwt"] = map_cmd("<cmd>lua require('neowiki').open_wiki_new_tab()<cr>")
+  ["n|<leader>mwt"] = map_cr("lua require('neowiki').open_wiki_new_tab()")
     :with_noremap()
     :with_silent()
     :with_desc("Open Wiki in Tab"),
@@ -358,10 +352,16 @@ local plug_map = {
     :with_desc("Format buffer (whitespace only)"),
 
   -- Plugin: tide
-  ["n|<leader>'"] = map_cmd("<CMD>lua require('tide.api').toggle_panel()<CR>")
+  ["n|<leader>'"] = map_cr("lua require('tide.api').toggle_panel()")
     :with_noremap()
     :with_silent()
     :with_desc("Tide: Open"),
+
+  -- Plugin: noice
+  ["n|<leader>nm"] = map_cr("messages")
+    :with_noremap()
+    :with_silent()
+    :with_desc("Show messages"),
 
   -- Plugin: snacks
   ["n|<leader>e"] = map_callback(function()
@@ -372,34 +372,94 @@ local plug_map = {
     :with_silent()
     :with_desc("Picker: Explorer"),
 
+  -- Plugin: snacks/picker - Projects
+  ["n|<leader>fp"] = map_callback(function()
+      get_snacks().picker.projects()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Picker: Projects"),
+
+  -- Plugin: snacks/terminal
+  ["nt|<C-T>"] = map_callback(function()
+      get_snacks().terminal.toggle()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Toggle terminal"),
+
+  -- Plugin: snacks/scratch
+  ["n|-"] = map_callback(function()
+      require("utils.snacks.scratch").new_scratch()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Scratch: New Scratchpad"),
+  ["n|_"] = map_callback(function()
+      require("utils.snacks.scratch").select_scratch()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Scratch: Open Existing"),
+
+  -- Plugin: snacks/notifier
+  ["n|<leader>nn"] = map_callback(function()
+      get_snacks().notifier.show_history()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Notification history"),
+  ["n|<leader>nd"] = map_callback(function()
+      get_snacks().notifier.hide()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Dismiss all notifications"),
+
+  -- Plugin: snacks/bufdelete
+  ["n|<c-x>"] = map_callback(function()
+      get_snacks().bufdelete()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Delete buffer"),
+
+  -- Plugin: snacks/gitbrowse
+  ["nv|<leader>gB"] = map_callback(function()
+      get_snacks().gitbrowse()
+    end)
+    :with_noremap()
+    :with_silent()
+    :with_desc("Git browse"),
+
   -- Plugin: yazi
-  ["n|<leader>f/"] = map_cmd("<CMD>Yazi<CR>"):with_noremap():with_silent():with_desc("Yazi: Current file"),
-  ["n|<leader>f-"] = map_cmd("<CMD>Yazi cwd<CR>")
+  ["n|<leader>f/"] = map_cr("Yazi"):with_noremap():with_silent():with_desc("Yazi: Current file"),
+  ["n|<leader>f-"] = map_cr("Yazi cwd")
     :with_noremap()
     :with_silent()
     :with_desc("Yazi: nvim working directory"),
-  ["n|<leader>f\\"] = map_cmd("<CMD>Yazi toggle<CR>")
+  ["n|<leader>f\\"] = map_cr("Yazi toggle")
     :with_noremap()
     :with_silent()
     :with_desc("Yazi: Resume last session"),
 
   -- Plugin: lazy
-  ["n|<leader>pl"] = map_cmd("<CMD>Lazy sync<CR>"):with_noremap():with_silent():with_desc("✓ Lazy: Sync"),
+  ["n|<leader>pl"] = map_cr("Lazy sync"):with_noremap():with_silent():with_desc("✓ Lazy: Sync"),
 
   -- Plugin: Mason
-  ["n|<leader>pm"] = map_cmd("<CMD>Mason<CR>"):with_noremap():with_silent():with_desc("Mason: Toggle"),
+  ["n|<leader>pm"] = map_cr("Mason"):with_noremap():with_silent():with_desc("Mason: Toggle"),
 
   -- Plugin: flags
-  ["n|<leader>F"] = map_cmd("<CMD>Flags<CR>"):with_noremap():with_silent():with_desc("Flags"),
+  ["n|<leader>F"] = map_cr("Flags"):with_noremap():with_silent():with_desc("Flags"),
 
   -- Plugin: buffer
-  ["n|<leader><tab>"] = map_cmd("<CMD>b#<CR>"):with_noremap():with_silent():with_desc("Buffer: Switch back & forth"),
-  ["n|<leader>b["] = map_cmd("<CMD>bp<CR>"):with_noremap():with_silent():with_desc("Buffer: Previous"),
-  ["n|<leader>b]"] = map_cmd("<CMD>bn<CR>"):with_noremap():with_silent():with_desc("Buffer: Next"),
+  ["n|<leader><tab>"] = map_cr("b#"):with_noremap():with_silent():with_desc("Buffer: Switch back & forth"),
+  ["n|<leader>b["] = map_cr("bp"):with_noremap():with_silent():with_desc("Buffer: Previous"),
+  ["n|<leader>b]"] = map_cr("bn"):with_noremap():with_silent():with_desc("Buffer: Next"),
 
   -- Plugin: move lines
-  ["n|<c-a-j>"] = map_cmd("<CMD>m .+1<CR>=="):with_noremap():with_silent():with_desc("Move: Line down"),
-  ["n|<c-a-k>"] = map_cmd("<CMD>m .-2<CR>=="):with_noremap():with_silent():with_desc("Move: Line up"),
+  ["n|<c-a-j>"] = map_cr("m .+1=="):with_noremap():with_silent():with_desc("Move: Line down"),
+  ["n|<c-a-k>"] = map_cr("m .-2=="):with_noremap():with_silent():with_desc("Move: Line up"),
   ["i|<c-a-j>"] = map_cmd("<Esc><CMD>m .+1<CR>==gi"):with_noremap():with_silent():with_desc("Move: Line down"),
   ["i|<c-a-k>"] = map_cmd("<Esc><CMD>m .-2<CR>==gi"):with_noremap():with_silent():with_desc("Move: Line up"),
   ["v|<c-a-j>"] = map_cmd("<ESC><CMD>'<,'>m '>+1<CR>gv=gv"):with_noremap():with_silent():with_desc("Move: Line down"),
@@ -453,60 +513,60 @@ local plug_map = {
   ["n|<leader>wl"] = map_cu("SmartSwapRight"):with_silent():with_noremap():with_desc("window: Move window right"),
 
   -- Plugin: boole.nvim
-  ["n|<C-n>"] = map_cmd("<CMD>Boole increment<CR>"):with_noremap():with_silent():with_desc("Boole: Increment"),
-  ["n|<C-m>"] = map_cmd("<CMD>Boole decrement<CR>"):with_noremap():with_silent():with_desc("Boole: Decrement"),
+  ["n|<C-n>"] = map_cr("Boole increment"):with_noremap():with_silent():with_desc("Boole: Increment"),
+  ["n|<C-m>"] = map_cr("Boole decrement"):with_noremap():with_silent():with_desc("Boole: Decrement"),
 
   -- Plugin: flash
-  ["nxo|s"] = map_cmd("<CMD>lua require('flash').jump()<CR>"):with_noremap():with_silent():with_desc("Flash"),
+  ["nxo|s"] = map_cr("lua require('flash').jump()"):with_noremap():with_silent():with_desc("Flash"),
 
   -- Plugin: gitsigns
-  ["n|<leader>gb"] = map_cmd("<CMD>Gitsigns toggle_current_line_blame<CR>")
+  ["n|<leader>gb"] = map_cr("Gitsigns toggle_current_line_blame")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Toggle current line blame"),
-  ["n|<leader>gs"] = map_cmd("<CMD>Gitsigns stage_hunk<CR>")
+  ["n|<leader>gs"] = map_cr("Gitsigns stage_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Stage hunk"),
-  ["n|<leader>gu"] = map_cmd("<CMD>Gitsigns undo_stage_hunk<CR>")
+  ["n|<leader>gu"] = map_cr("Gitsigns undo_stage_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Undo stage hunk"),
-  ["n|<leader>gt"] = map_cmd("<CMD>Gitsigns toggle_signs<CR>")
+  ["n|<leader>gt"] = map_cr("Gitsigns toggle_signs")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Toggle signs"),
-  ["n|<leader>gi"] = map_cmd("<CMD>Gitsigns preview_hunk_inline<CR>")
+  ["n|<leader>gi"] = map_cr("Gitsigns preview_hunk_inline")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Preview hunk inline"),
-  ["n|<leader>gr"] = map_cmd("<CMD>Gitsigns reset_hunk<CR>")
+  ["n|<leader>gr"] = map_cr("Gitsigns reset_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Reset hunk"),
-  ["n|<leader>gR"] = map_cmd("<CMD>Gitsigns reset_buffer<CR>")
+  ["n|<leader>gR"] = map_cr("Gitsigns reset_buffer")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Reset buffer"),
-  ["n|<leader>gp"] = map_cmd("<CMD>Gitsigns preview_hunk<CR>")
+  ["n|<leader>gp"] = map_cr("Gitsigns preview_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Preview hunk"),
-  ["n|<leader>g]"] = map_cmd("<CMD>Gitsigns next_hunk<CR>")
+  ["n|<leader>g]"] = map_cr("Gitsigns next_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Next hunk"),
-  ["n|<leader>g["] = map_cmd("<CMD>Gitsigns prev_hunk<CR>")
+  ["n|<leader>g["] = map_cr("Gitsigns prev_hunk")
     :with_noremap()
     :with_silent()
     :with_desc("Gitsigns: Prev hunk"),
 
   -- Plugin: diffview.nvim
-  ["n|<leader>gh"] = map_cmd("<CMD>DiffviewFileHistory<CR>")
+  ["n|<leader>gh"] = map_cr("DiffviewFileHistory")
     :with_noremap()
     :with_silent()
     :with_desc("Diff branch history"),
-  ["n|<leader>gd"] = map_cmd("<CMD>DiffviewFileHistory --follow %<CR>")
+  ["n|<leader>gd"] = map_cr("DiffviewFileHistory --follow %")
     :with_noremap()
     :with_silent()
     :with_desc("Diff file"),
@@ -526,14 +586,14 @@ local plug_map = {
     :with_noremap()
     :with_silent()
     :with_desc("Diff view"),
-  ["n|<leader>gx"] = map_cmd("<CMD>ClipboardDiff<CR>"):with_noremap():with_silent():with_desc("Diff clipboard"),
+  ["n|<leader>gx"] = map_cr("ClipboardDiff"):with_noremap():with_silent():with_desc("Diff clipboard"),
   ["v|<leader>gx"] = map_cmd("<ESC><CMD>ClipboardDiffSelection<CR>")
     :with_noremap()
     :with_silent()
     :with_desc("Diff clipboard Selection"),
 
   -- Plugin: auto-save.nvim
-  ["n|<leader>oa"] = map_cmd("<CMD>ASToggle<CR>"):with_noremap():with_silent():with_desc("Toggle auto save"),
+  ["n|<leader>oa"] = map_cr("ASToggle"):with_noremap():with_silent():with_desc("Toggle auto save"),
 
   -- Plugin: grug-far.nvim
   ["n|<leader>r"] = map_callback(function()
@@ -580,9 +640,9 @@ local plug_map = {
     :with_desc("Current session"),
 
   -- Plugin: Suda
-  ["n|<leader>qS"] = map_cmd("<CMD>Suda w<CR>"):with_noremap():with_silent():with_desc("Suda: Write"),
-  ["n|<leader>qv"] = map_cmd("<CMD>Suda wq<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit"),
-  ["n|<leader>qa"] = map_cmd("<CMD>Suda wqa<CR>"):with_noremap():with_silent():with_desc("Suda: Write and quit all"),
+  ["n|<leader>qS"] = map_cr("Suda w"):with_noremap():with_silent():with_desc("Suda: Write"),
+  ["n|<leader>qv"] = map_cr("Suda wq"):with_noremap():with_silent():with_desc("Suda: Write and quit"),
+  ["n|<leader>qa"] = map_cr("Suda wqa"):with_noremap():with_silent():with_desc("Suda: Write and quit all"),
 
   -- Plugin: todo-comments
   ["n|<leader>xc"] = map_callback(function()
@@ -594,32 +654,32 @@ local plug_map = {
     :with_desc("Todo Comments: show TODO"),
 
   -- Plugin: Trouble
-  ["n|<leader>xw"] = map_cmd("<CMD>Trouble diagnostics toggle<CR>")
+  ["n|<leader>xw"] = map_cr("Trouble diagnostics toggle")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: workspace diagnostics"),
-  ["n|<leader>xx"] = map_cmd("<CMD>Trouble diagnostics toggle filter.buf=0<CR>")
+  ["n|<leader>xx"] = map_cr("Trouble diagnostics toggle filter.buf=0")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: document diagnostics"),
-  ["n|<leader>xq"] = map_cmd("<CMD>Trouble quickfix toggle<CR>")
+  ["n|<leader>xq"] = map_cr("Trouble quickfix toggle")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: quickfix list"),
-  ["n|<c-q>"] = map_cmd("<CMD>Trouble quickfix toggle<CR>")
+  ["n|<c-q>"] = map_cr("Trouble quickfix toggle")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: quickfix list"),
-  ["n|<leader>xl"] = map_cmd("<CMD>Trouble loclist toggle<CR>")
+  ["n|<leader>xl"] = map_cr("Trouble loclist toggle")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: location list"),
-  ["n|<leader>xt"] = map_cmd("<CMD>Trouble todo toggle<CR>"):with_noremap():with_silent():with_desc("Trouble: TODO"),
-  ["n|<leader>xs"] = map_cmd("<CMD>Trouble symbols toggle win.position=right<CR>")
+  ["n|<leader>xt"] = map_cr("Trouble todo toggle"):with_noremap():with_silent():with_desc("Trouble: TODO"),
+  ["n|<leader>xs"] = map_cr("Trouble symbols toggle win.position=right")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: Symbols"),
-  ["n|<leader>xp"] = map_cmd("<CMD>Trouble lsp toggle win.position=right<CR>")
+  ["n|<leader>xp"] = map_cr("Trouble lsp toggle win.position=right")
     :with_noremap()
     :with_silent()
     :with_desc("Trouble: LSP"),
@@ -633,7 +693,7 @@ local plug_map = {
     :with_desc("Rename file"),
 
   -- Plugin: screenkey
-  ["n|<leader>ckt"] = map_cmd("<CMD>Screenkey<CR>"):with_noremap():with_silent():with_desc("Screenkey: Toggle"),
+  ["n|<leader>ckt"] = map_cr("Screenkey"):with_noremap():with_silent():with_desc("Screenkey: Toggle"),
   ["n|<leader>ckr"] = map_callback(function()
       require("screenkey").redraw()
     end)
@@ -705,8 +765,8 @@ local misc_map = {
     :with_desc("Window: Toggle maximize"),
 
   -- Enhanced buffer management
-  ["n|<C-PageDown>"] = map_cmd("<CMD>bn<CR>"):with_noremap():with_silent():with_desc("Buffer: Next"),
-  ["n|<C-PageUp>"] = map_cmd("<CMD>bp<CR>"):with_noremap():with_silent():with_desc("Buffer: Previous"),
+  ["n|<C-PageDown>"] = map_cr("bn"):with_noremap():with_silent():with_desc("Buffer: Next"),
+  ["n|<C-PageUp>"] = map_cr("bp"):with_noremap():with_silent():with_desc("Buffer: Previous"),
   ["n|<leader>bw"] = map_callback(function()
       -- Only delete buffer when not last
       if #vim.fn.getbufinfo({ buflisted = 1 }) > 1 then
@@ -728,17 +788,17 @@ local misc_map = {
     :with_desc("Buffer: Close all except current"),
 
   -- Profiling and diagnostics
-  ["n|<leader>pp"] = map_cmd("<CMD>Profile<CR>")
+  ["n|<leader>pp"] = map_cr("Profile")
     :with_noremap()
     :with_silent()
     :with_desc("Generate detailed profile report"),
-  ["n|<leader>ps"] = map_cmd("<CMD>ProfileSummary<CR>"):with_noremap():with_silent():with_desc("Show profile summary"),
-  ["n|<leader>pL"] = map_cmd("<CMD>ProfileLogs<CR>"):with_noremap():with_silent():with_desc("List profile logs"),
-  ["n|<leader>pa"] = map_cmd("<CMD>ProfilePlugins<CR>")
+  ["n|<leader>ps"] = map_cr("ProfileSummary"):with_noremap():with_silent():with_desc("Show profile summary"),
+  ["n|<leader>pL"] = map_cr("ProfileLogs"):with_noremap():with_silent():with_desc("List profile logs"),
+  ["n|<leader>pa"] = map_cr("ProfilePlugins")
     :with_noremap()
     :with_silent()
     :with_desc("Analyze plugin performance"),
-  ["n|<leader>pc"] = map_cmd("<CMD>ProfileClean<CR>"):with_noremap():with_silent():with_desc("Clean up profile logs"),
+  ["n|<leader>pc"] = map_cr("ProfileClean"):with_noremap():with_silent():with_desc("Clean up profile logs"),
 }
 
 -- Defer loading of miscellaneous keymaps
@@ -779,6 +839,11 @@ vim.defer_fn(function()
     mode = "n",
     { "<leader>-", desc = "Scratch: New Scratchpad", icon = "" },
     { "<leader>_", desc = "Scratch: Open Existing", icon = "" },
+    { "<leader>nm", desc = "Noice: Show messages", icon = "" },
+    { "<leader>nn", desc = "Notification history", icon = "" },
+    { "<leader>nd", desc = "Dismiss notifications", icon = "" },
+    { "<leader>fp", desc = "Picker: Projects", icon = "" },
+    { "<leader>gB", desc = "Git browse", icon = "" },
     { "<leader>lr", desc = "LSP: Show references", icon = "" },
     { "<leader>lk", desc = "LSP: Go to declaration", icon = "" },
     { "<leader>ld", desc = "LSP: Show definitions", icon = "" },
@@ -1064,6 +1129,7 @@ local readme_map = {
       "",
       "## 🔌 Plugins",
       "",
+
 -- stylua: ignore end
       }
       local plugins_md = {}
@@ -1095,7 +1161,7 @@ local readme_map = {
     :with_desc("Generate README.md"),
 }
 
--- Load with small delay after the core keymaps
+-- Load with small delay after core keymaps
 vim.defer_fn(function()
   bind.nvim_load_mapping(readme_map)
 end, 60)
