@@ -97,7 +97,7 @@ The pre-commit hook automatically runs: stylua formatting, luacheck linting, and
 
 ### Basic Plugin Structure
 
-All plugin configurations follow the lazy.nvim format:
+All plugin configurations follow lazy.nvim format:
 
 ```lua
 return {
@@ -132,7 +132,7 @@ vim.g.ai = require("utils.flags").get_flags("ai") or false
 vim.g.suggestions = require("utils.flags").get_flags("suggestions") or false
 ```
 
-Conditional plugins return early if the flag is false:
+Conditional plugins return early if flag is false:
 
 ```lua
 if not vim.g.ai then
@@ -144,7 +144,7 @@ end
 
 ### Keybinding Utilities
 
-All keybindings use the `utils.keymap-bind` module:
+All keybindings use `utils.keymap-bind` module:
 
 ```lua
 local bind = require("utils.keymap-bind")
@@ -326,7 +326,7 @@ Core modules load sequentially in `init.lua`:
 4. `config.keymaps`
 5. `config.autocmd`
 
-Never modify the loading order unless necessary for dependency resolution.
+Never modify loading order unless necessary for dependency resolution.
 
 ### Lazy.nvim Performance Settings
 
@@ -350,11 +350,16 @@ LSP servers defined in `lua/plugins/lsp.lua`:
 - Use `root_dir` for workspace detection
 - Settings follow standard LSP config format
 
+**Important LSP Servers:**
+- **ltex_plus**: Grammar and spell checking for Markdown, LaTeX, text (configured in lsp.lua lines 97-149)
+- **ltex_extra.nvim**: Project-specific dictionaries and custom rules for LTeX (auto-loads on LSP attach)
+- **harper_ls**: Additional prose linting (configured in lsp.lua lines 36-55)
+
 ### Filetype-Specific Gotchas
 
 The config uses a comprehensive `vim.g.ignore_filetypes` list. When adding features:
-1. Check if the filetype is in the ignore list
-2. Consider whether the feature should work in UI buffers (Telescope, lazygit, etc.)
+1. Check if filetype is in ignore list
+2. Consider whether feature should work in UI buffers (Telescope, lazygit, etc.)
 3. Update ignore list if necessary
 
 ## External Dependencies
@@ -439,6 +444,78 @@ Conditional AI features based on flags:
 
 ## Recent Session Context
 
+### Session: Plugin Cleanup & Keymap Refactor (2024-12-26)
+
+**Major Changes Made:**
+1. **Keymap Refactoring**: Converted 28 keymaps from `map_cmd` to `map_cr` for cleaner syntax
+   - Simplified command-based keybindings (e.g., `map_cr("command")` instead of `map_cmd(":command<CR>")`)
+   - Updated builtin, markdown, and plugin keymaps throughout config/keymaps.lua
+
+2. **Removed Unused Plugins**:
+   - **mini.files**: Completely removed (file: `plugins/mini-files.lua`)
+     - Replaced by yazi (primary file explorer) + snacks explorer (quick access)
+     - Removed related keymaps from `plugins/explorer.lua`
+   - **mini.icons**: Completely removed (file: `plugins/mini-icons.lua`)
+     - Verified all plugins (telescope, lualine, monokai-pro) use `nvim-web-devicons`
+     - User ran `:Lazy clean mini.icons` to remove from installation
+     - Consolidated to single icon library: `nvim-web-devicons`
+
+3. **Keymap Centralization** (config/keymaps.lua):
+   - Added which-key entries for snacks plugins:
+     - Terminal toggle (`nt|<C-T>`)
+     - Scratch new/existing (`-`, `_`)
+     - Notifier history/dismiss (`<leader>nn`, `<leader>nd`)
+     - Buffer delete (`<c-x>`)
+     - Git browse (`nv|<leader>gB`)
+   - Removed snacks zen toggle (conflicted with zen-mode keymap)
+   - Removed notify.lua keymap (handled by snacks/notifier)
+   - Removed unused local variable from snacks/picker.lua
+   - Removed snacks/picker projects keymap (unused, covered by snacks.projects)
+
+4. **Verified All Plugins Are Active**:
+   - Initially suspected `ltex_extra.nvim` might be unused
+   - **Correction**: User confirmed LTeX LSP + ltex_extra.nvim ARE essential
+   - LTeX LSP provides grammar/spell checking for Markdown (not just LaTeX)
+   - ltex_extra configured in `plugins/lsp.lua` (lines 214-232) for project dictionaries
+   - All plugins verified as actively used with keymaps, configs, or event handlers
+
+**Files Modified:**
+- `lua/plugins/explorer.lua`: Removed mini.files fallback (~70 lines), simplified to yazi-only
+- `lua/plugins/mini-files.lua`: **DELETED**
+- `lua/plugins/mini-icons.lua`: **DELETED**
+- `lua/config/keymaps.lua`: Refactored 28 keymaps to `map_cr`, added snacks which-key entries
+
+**Plugin Status Summary:**
+| Plugin | Status | Replaced By / Notes |
+|---------|---------|---------------------|
+| mini.files | ❌ Removed | yazi + snacks.explorer |
+| mini.icons | ❌ Removed | nvim-web-devicons (all plugins use it) |
+| ltex_extra.nvim | ✅ Active | Essential for Markdown grammar/dictionaries |
+
+**Git Commits Made:**
+1. `refactor(keymaps): centralize keymaps and clean up unused plugins`
+   - Convert 28 keymaps from map_cmd to map_cr
+   - Remove mini.files (replaced by yazi + snacks)
+   - Add which-key entries for snacks plugins
+   - Remove snacks zen toggle (conflicts with zen-mode)
+   - Remove unused local from snacks/picker.lua
+
+2. `refactor(icons): remove mini.icons dependency`
+   - Remove mini.icons plugin (was never actually used)
+   - All plugins (telescope, lualine, monokai-pro) already use nvim-web-devicons
+   - Clean up redundant icon library dependency
+
+**Key Learning:**
+- Never assume a plugin is unused without checking:
+  - Plugin configuration files
+  - Keymap registrations
+  - Event handler attachments (LspAttach, BufRead, etc.)
+  - Lazy.nvim dependencies
+- User confirmed LTeX LSP is important for Markdown workflows (mentioned in AGENTS.md)
+
+**All Plugins Verified:**
+Every plugin in nvim-writer is actively used with proper configuration and keybindings.
+
 ### Session: Documentation Refactor & Test Infrastructure (2024-12-26)
 
 **Major Changes Made:**
@@ -460,6 +537,7 @@ Conditional AI features based on flags:
 - `tests/spec/writing_plugins_spec.lua` - Tests critical plugin files (3 tests)
 
 **Test Coverage Summary:**
+
 | Test File | Tests | Description |
 |-----------|--------|-------------|
 | basic_spec.lua | 3 | Neovim version, test mode |
@@ -570,6 +648,7 @@ Conditional AI features based on flags:
 - Markdown formatter (prettier) ✅
 - Prose linter (proselint) ✅
 - Review this AGENTS.md file for recent session context
+
 ## Troubleshooting
 
 ### Common Issues

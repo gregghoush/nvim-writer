@@ -36,7 +36,7 @@ return {
       { "<leader>c", group = "Code & Commands", icon = "" },
       { "<leader>ck", group = "ScreenKey", icon = "" },
       { "<leader>f", group = "Files", icon = "" },
-      { "<leader>g", group = "Git" },
+      { "<leader>g", group = "Git", icon = "󰊢" },
       { "<leader>l", group = "LSP", icon = "󱜙" },
       { "<leader>m", group = "Markdown Book", icon = "" },
       { "<leader>mb", group = "Book Indexes", icon = "" },
