@@ -4,7 +4,7 @@ return {
   opts = {
     wiki_dirs = {
       -- neowiki.nvim supports both absolute and tilde-expanded paths
-      { name = "Veil of the System", path = "~/work/books/veil-of-the-system/" },
+      { name = "Veil of the System", path = "/Volumes/Data/books/veil-of-the-system" },
     },
     keymaps = {
       -- In Normal mode, follows the link under the cursor.

@@ -6,6 +6,7 @@ return {
     require("conform").setup({
       formatters_by_ft = {
         markdown = { "prettier" },
+        yaml = { "prettier" },
       },
       default_format_opts = {
         lsp_format = "fallback",
